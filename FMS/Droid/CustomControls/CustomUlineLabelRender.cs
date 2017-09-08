@@ -8,6 +8,7 @@ using Xamarin.Forms.Platform.Android;
 using Android.Support.V4.App;
 using Android.OS;
 using Android.Text;
+using Android.Text.Style;
 
 [assembly: ExportRenderer(typeof(CustomUlineLabel), typeof(CustomUlineLabelRender))]
 namespace FMS.Droid
@@ -80,6 +81,13 @@ namespace FMS.Droid
 
                         string finalText = "<p>" + string1 + "<u>" + string2 + "</u>" + string3 + "</p>";
                         label.TextFormatted = Html.FromHtml(finalText);
+
+
+                        SpannableString mySpannableString = new SpannableString("My String");
+                        mySpannableString.SetSpan(new UnderlineSpan(), mySpannableString.Length(), 0, SpanTypes.Paragraph);
+                        label.TextFormatted = mySpannableString;
+
+
                         //                        // the below line has to be like if(Build.VERSION.SdkInt >= Build.VERSION_CODES.LollipopMr1)
                         //                        //if(Build.VERSION.SdkInt >= Build.VERSION_CODES.LollipopMr1)
                         //                        if (Build.VERSION.SdkInt > Build.VERSION_CODES.N)

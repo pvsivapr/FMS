@@ -1,52 +1,55 @@
 ﻿using System;
-using FMS.iOS;
 using FMS;
+using FMS.iOS;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-
-[assembly: ExportRenderer(typeof(CustomEntry), typeof(CustomEntryRenderer))]
+[assembly: ExportRenderer(typeof(CustomPicker), typeof(CustomPickerRender))]
 namespace FMS.iOS
 {
-    public class CustomEntryRenderer : EntryRenderer
+    public class CustomPickerRender : PickerRenderer
     {
-        protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
+        public CustomPickerRender() { }
+
+        protected override void OnElementChanged(ElementChangedEventArgs<Picker> e)
         {
             base.OnElementChanged(e);
             try
             {
-                CustomEntry element = Element as CustomEntry;
+
+                CustomPicker element = Element as CustomPicker;
                 if (e.NewElement != null)
                 {
-                    element = Element as CustomEntry;
+                    element = Element as CustomPicker;
                 }
                 else
                 {
-                    element = e.OldElement as CustomEntry;
+                    element = e.OldElement as CustomPicker;
                 }
-
                 if (Control != null)
                 {
-                    // do whatever you want to the UITextField here
-                    //var element = Element as CustomEntry;
+                    //var element = Element as CustomPicker;
+                    var textGiven = element.EnterText;
                     Control.BorderStyle = UITextBorderStyle.Line;
                     Control.Layer.CornerRadius = 0;
                     Control.ExclusiveTouch = true;
-                    //Control.MinimumFontSize = 15f;
+                    //Control.AttributedPlaceholder = new NSAttributedString(element.Title, null, UIColor.Black);
+                    if (!string.IsNullOrWhiteSpace(textGiven))
+                    {
+                        Control.Text = textGiven;
+                    }
+                    Control.TextColor = UIColor.Black;
                     Control.AdjustsFontSizeToFitWidth = true;
-                    Control.TextColor = UIColor.Black;//for place holder
-                                                      //var entry1 = new Entry();
-                                                      //Control.Layer.BorderColor = Color.FromHex("#0000").ToCGColor();
-                                                      //Control.Layer.BorderWidth = 0;
-                                                      //entry1.Layer.BorderWidth = 1f;
+                    Control.TintColor = UIColor.Black;
+                    Control.AttributedPlaceholder = new Foundation.NSAttributedString(Control.AttributedPlaceholder.Value, foregroundColor: UIColor.Black);
                     if (element.CustomFontFamily == "Avenir65")
                     {
-                        Control.Font = UIFont.FromName("AvenirLTStd-Medium.ttf", 20.0f);
+                        Control.Font = UIFont.FromName("AvenirLTStd-Medium.ttf", 18f);
                     }
                     else if (element.CustomFontFamily == "Avenir45")
                     {
-                        Control.Font = UIFont.FromName("AvenirLTStd-Book.ttf", 20.0f);
+                        Control.Font = UIFont.FromName("AvenirLTStd-Book.ttf", 18f);
                     }
                     else
                     {
@@ -72,28 +75,31 @@ namespace FMS.iOS
             base.OnElementPropertyChanged(sender, e);
             try
             {
-                CustomEntry element = Element as CustomEntry;
+
+                CustomPicker element = Element as CustomPicker;
                 if (Control != null)
                 {
-                    // do whatever you want to the UITextField here
-                    //var element = Element as CustomEntry;
+                    //var element = Element as CustomPicker;
+                    var textGiven = element.EnterText;
                     Control.BorderStyle = UITextBorderStyle.Line;
                     Control.Layer.CornerRadius = 0;
                     Control.ExclusiveTouch = true;
-                    //Control.MinimumFontSize = 15f;
+                    //Control.AttributedPlaceholder = new NSAttributedString(element.Title, null, UIColor.Black);
+                    if (!string.IsNullOrWhiteSpace(textGiven))
+                    {
+                        //Control.Text = textGiven;
+                    }
+                    Control.TextColor = UIColor.Black;
                     Control.AdjustsFontSizeToFitWidth = true;
-                    Control.TextColor = UIColor.Black;//for place holder
-                                                      //var entry1 = new Entry();
-                                                      //Control.Layer.BorderColor = Color.FromHex("#0000").ToCGColor();
-                                                      //Control.Layer.BorderWidth = 0;
-                                                      //entry1.Layer.BorderWidth = 1f;
+                    Control.TintColor = UIColor.Black;
+                    Control.AttributedPlaceholder = new Foundation.NSAttributedString(Control.AttributedPlaceholder.Value, foregroundColor: UIColor.Black);
                     if (element.CustomFontFamily == "Avenir65")
                     {
-                        Control.Font = UIFont.FromName("AvenirLTStd-Medium.ttf", 20.0f);
+                        Control.Font = UIFont.FromName("AvenirLTStd-Medium.ttf", 18f);
                     }
                     else if (element.CustomFontFamily == "Avenir45")
                     {
-                        Control.Font = UIFont.FromName("AvenirLTStd-Book.ttf", 20.0f);
+                        Control.Font = UIFont.FromName("AvenirLTStd-Book.ttf", 18f);
                     }
                     else
                     {
@@ -114,5 +120,4 @@ namespace FMS.iOS
             }
         }
     }
-
 }
