@@ -1,0 +1,14 @@
+﻿<Properties StartupConfiguration="{E204E543-D98B-48C1-B09E-646B37FFC53D}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="iOS/CustomControls/CustomEntryRenderer.cs">
+    <Files>
+      <File FileName="iOS/CustomControls/CustomEntryRenderer.cs" Line="87" Column="6" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.FMS.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.181B3DA1-30B6-4A59-9D79-331C3C344171" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>
