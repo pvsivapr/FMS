@@ -7,6 +7,7 @@ namespace FMS
 {
     public partial class RegisterStepOne : BaseContentPage
     {
+        public static RegisterStepOne reg1;
         public RegisterStepOne()
         {
             #region for local variables
@@ -19,7 +20,7 @@ namespace FMS
             #endregion
 
             InitializeComponent();
-
+            reg1 = this;
             #region for Custom Style
 
             #region for Entry styles
@@ -616,6 +617,11 @@ namespace FMS
             #endregion
 
             #endregion
+        }
+
+        public void display(string value)
+        {
+            DisplayThisAlert(value);
         }
     }
 }
