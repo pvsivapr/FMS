@@ -67,7 +67,7 @@ namespace FMS.Droid
                             charLength = text.Length;
                         }
 
-                        /*
+
                         var string1 = element.Text.Substring(0, element.StartIndex);
                         if (string1 == "<")
                         {
@@ -82,18 +82,15 @@ namespace FMS.Droid
                         var string3 = element.Text.Substring(element.StartIndex + charLength, (element.Text.Length - (element.StartIndex + charLength)));
                         string finalText = "<p>" + string1 + "<u>" + string2 + "</u>" + string3 + "</p>";
                         label.TextFormatted = Html.FromHtml(finalText);
+
+
+
+
+                        /*
+                        //SpannableString mySpannableString = new SpannableString(element.Text);
+                        //mySpannableString.SetSpan(new UnderlineSpan(), startind, (startind + (charLength)), SpanTypes.ExclusiveExclusive);
+                        //label.TextFormatted = mySpannableString;
                         */
-
-
-
-
-                        SpannableString mySpannableString = new SpannableString(element.Text);
-                        //mySpannableString.RemoveSpan(new UnderlineSpan());
-                        //mySpannableString.SetSpan(new UnderlineSpan(), 0, (element.Text.Length), SpanTypes.ExclusiveExclusive);
-                        mySpannableString.SetSpan(new UnderlineSpan(), startind, (startind + (charLength)), SpanTypes.ExclusiveExclusive);
-                        //mySpannableString.SetSpan(new UnderlineSpan(), startind, startind + charLength - 1, SpanTypes.Paragraph);
-                        label.TextFormatted = mySpannableString;
-
 
                         //                        // the below line has to be like if(Build.VERSION.SdkInt >= Build.VERSION_CODES.LollipopMr1)
                         //                        //if(Build.VERSION.SdkInt >= Build.VERSION_CODES.LollipopMr1)
@@ -125,7 +122,7 @@ namespace FMS.Droid
                 catch (Exception ex)
                 {
                     var msg = ex.Message;
-                    RegisterStepOne.reg1.display(msg);
+                    //RegisterStepOne.reg1.display(msg);
                 }
             }
         }

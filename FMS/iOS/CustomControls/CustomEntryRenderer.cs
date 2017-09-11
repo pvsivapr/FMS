@@ -40,6 +40,23 @@ namespace FMS.iOS
                                                       //Control.Layer.BorderColor = Color.FromHex("#0000").ToCGColor();
                                                       //Control.Layer.BorderWidth = 0;
                                                       //entry1.Layer.BorderWidth = 1f;
+                                                      //Control.TintColor = UIColor.Gray;
+                                                      //Control.TintColor = Color.FromHex(element.BorderColors).ToUIColor();
+                    Control.TintColor = UIColor.Gray;
+                    Control.Layer.BorderWidth = 1f;
+                    //Control.Layer.BorderColor = Color.FromHex(element.BorderColors).ToCGColor();
+                    if (element.BorderColors == "#ff0000")
+                    {
+                        Control.Layer.BorderColor = Color.Red.ToCGColor();
+                    }
+                    else if (element.BorderColors == "#6C6C6C")
+                    {
+                        Control.Layer.BorderColor = Color.Gray.ToCGColor();
+                    }
+
+                    //Layer.BorderColor = Color.FromHex("F78F1E").ToCGColor();
+                    //Layer.BorderWidth = 0.1f;
+                    //Control.TintColor = Color.FromHex("#F78F1E").ToUIColor();
                     if (element.CustomFontFamily == "Avenir65")
                     {
                         Control.Font = UIFont.FromName("AvenirLTStd-Medium.ttf", 20.0f);
@@ -87,6 +104,22 @@ namespace FMS.iOS
                                                       //Control.Layer.BorderColor = Color.FromHex("#0000").ToCGColor();
                                                       //Control.Layer.BorderWidth = 0;
                                                       //entry1.Layer.BorderWidth = 1f;
+                                                      //Control.TintColor = UIColor.Gray;
+                                                      //Control.TintColor = Color.FromHex(element.BorderColors).ToUIColor();
+                    Control.TintColor = UIColor.Gray;
+                    Control.Layer.BorderWidth = 1f;
+                    //Control.Layer.BorderColor = Color.FromHex(element.BorderColors).ToCGColor();
+                    if (element.BorderColors == "#ff0000")
+                    {
+                        Control.Layer.BorderColor = Color.Red.ToCGColor();
+                    }
+                    else if (element.BorderColors == "#6C6C6C")
+                    {
+                        Control.Layer.BorderColor = Color.Gray.ToCGColor();
+                    }
+                    //Control.Layer.BorderColor = Color.FromHex("F78F1E").ToCGColor();
+                    //Control.Layer.BorderWidth = 0.1f;
+                    //Control.TintColor = Color.FromHex("#F78F1E").ToUIColor();
                     if (element.CustomFontFamily == "Avenir65")
                     {
                         Control.Font = UIFont.FromName("AvenirLTStd-Medium.ttf", 20.0f);
