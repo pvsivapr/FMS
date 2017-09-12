@@ -9,6 +9,7 @@ using Android.Support.V4.App;
 using Android.OS;
 using Android.Text;
 using Android.Text.Style;
+using android = global::Android;
 
 [assembly: ExportRenderer(typeof(CustomUlineLabel), typeof(CustomUlineLabelRender))]
 namespace FMS.Droid
@@ -80,8 +81,17 @@ namespace FMS.Droid
                         }
                         var string2 = element.Text.Substring(element.StartIndex, charLength);
                         var string3 = element.Text.Substring(element.StartIndex + charLength, (element.Text.Length - (element.StartIndex + charLength)));
-                        string finalText = "<p>" + string1 + "<u>" + string2 + "</u>" + string3 + "</p>";
+
+                        //string finalText = "<p valign=\"center\">" + string1 + "<u>" + string2 + "</u>" + string3 + "</p>";
+                        string finalText = "<table><tr><td>" + string1 + "<u>" + string2 + "</u>" + string3 + "</td></tr></table>"; ;
+
                         label.TextFormatted = Html.FromHtml(finalText);
+
+                        label.LayoutParameters = new LayoutParams(LayoutParams.MatchParent, LayoutParams.MatchParent);
+                        //uLineTextView.LayoutParameters = new android.Views.LayoutParameters(LayoutParams.MatchParent, LayoutParams.MatchParent);
+                        //uLineTextView.SetForegroundGravity(android.Views.GravityFlags.CenterVertical);
+                        //label.SetBackgroundColor(android.Graphics.Color.Green);
+                        label.Gravity = android.Views.GravityFlags.Center;
 
 
 
