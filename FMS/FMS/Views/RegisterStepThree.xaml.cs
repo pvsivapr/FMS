@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 
 using Xamarin.Forms;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace FMS
 {
@@ -237,6 +239,7 @@ namespace FMS
 
             #region for validations and events
 
+
             #region for text changes in entries
             entryUPassword.TextChanged += (object sender, TextChangedEventArgs e) =>
             {
@@ -265,7 +268,7 @@ namespace FMS
             #region for Next Button EventHandler
             TapGestureRecognizer nextBtnTapped = new TapGestureRecognizer();
             nextBtnTapped.NumberOfTapsRequired = 1;
-            nextBtnTapped.Tapped += (object sender, EventArgs e) =>
+            nextBtnTapped.Tapped += async (object sender, EventArgs e) =>
             {
                 try
                 {
@@ -274,8 +277,15 @@ namespace FMS
                         entryUPassword.BorderColors = AppGlobalVariables.EntryBorderErrorColor;
                         entryUPassword.Text = entryUPassword.Text + " ";
                         entryUPassword.Text = entryUPassword.Text.Remove(entryUPassword.Text.Length - 1);
-                        DisplayThisAlert("The first name Cannot be empty");
+                        DisplayThisAlert("Password Cannot be empty");
                     }
+                    //else if (!Regex.IsMatch(entryUPassword.Text, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$"))
+                    //{
+                    //    entryUPassword.BorderColors = AppGlobalVariables.EntryBorderErrorColor;
+                    //    entryUPassword.Text = entryUPassword.Text + " ";
+                    //    entryUPassword.Text = entryUPassword.Text.Remove(entryUPassword.Text.Length - 1);
+                    //    DisplayThisAlert("“Must contain lowercase/uppercase, numbers and possibly special characters");
+                    //}
                     else if (string.IsNullOrEmpty(entryUConfirlPassword.Text))
                     {
                         entryUConfirlPassword.BorderColors = AppGlobalVariables.EntryBorderErrorColor;
@@ -283,24 +293,39 @@ namespace FMS
                         entryUConfirlPassword.Text = entryUConfirlPassword.Text.Remove(entryUConfirlPassword.Text.Length - 1);
                         DisplayThisAlert("The last name Cannot be empty");
                     }
-                    else if (!(entryUPassword.Text == entryUConfirlPassword.Text))
-                    {
-                        entryUPassword.BorderColors = AppGlobalVariables.EntryBorderErrorColor;
-                        entryUPassword.Text = entryUPassword.Text + " ";
-                        entryUPassword.Text = entryUPassword.Text.Remove(entryUPassword.Text.Length - 1);
-                        entryUConfirlPassword.BorderColors = AppGlobalVariables.EntryBorderErrorColor;
-                        entryUConfirlPassword.Text = entryUConfirlPassword.Text + " ";
-                        entryUConfirlPassword.Text = entryUConfirlPassword.Text.Remove(entryUConfirlPassword.Text.Length - 1);
-                        DisplayThisAlert("Passwords did not match");
-                    }
+                    //else if (!Regex.IsMatch(entryUConfirlPassword.Text, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$"))
+                    //{
+                    //    entryUConfirlPassword.BorderColors = AppGlobalVariables.EntryBorderErrorColor;
+                    //    entryUConfirlPassword.Text = entryUConfirlPassword.Text + " ";
+                    //    entryUConfirlPassword.Text = entryUConfirlPassword.Text.Remove(entryUConfirlPassword.Text.Length - 1);
+                    //    DisplayThisAlert("The last name Cannot be empty");
+                    //}
+                    //else if (!(entryUPassword.Text == entryUConfirlPassword.Text))
+                    //{
+                    //    entryUPassword.BorderColors = AppGlobalVariables.EntryBorderErrorColor;
+                    //    entryUPassword.Text = entryUPassword.Text + " ";
+                    //    entryUPassword.Text = entryUPassword.Text.Remove(entryUPassword.Text.Length - 1);
+                    //    entryUConfirlPassword.BorderColors = AppGlobalVariables.EntryBorderErrorColor;
+                    //    entryUConfirlPassword.Text = entryUConfirlPassword.Text + " ";
+                    //    entryUConfirlPassword.Text = entryUConfirlPassword.Text.Remove(entryUConfirlPassword.Text.Length - 1);
+                    //    DisplayThisAlert("Passwords did not match");
+                    //}
                     else
                     {
-                        RegisterStepOne.rso.userP.password = entryUPassword.Text;
-                        RegisterStepOne.rso.userP.confirmPassword = entryUConfirlPassword.Text;
-                        RegisterStepOne.rso.userP.forcePasswordReset = "false";
+                        var response = await validatePassword(entryUPassword.Text);
+                        if (response == true)
+                        {
+                            RegisterStepOne.rso.userP.password = entryUPassword.Text;
+                            RegisterStepOne.rso.userP.confirmPassword = entryUConfirlPassword.Text;
+                            RegisterStepOne.rso.userP.forcePasswordReset = "false";
+                            UserRegister();
 
-                        UserRegister();
-                        //Navigation.PushModalAsync(new RegisterComplete());
+                            //Navigation.PushModalAsync(new RegisterComplete());
+                        }
+                        else
+                        {
+
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -349,5 +374,98 @@ namespace FMS
             PageLoading.IsVisible = false;
         }
         #endregion
+
+        #region for password validation
+        public async Task<bool> validatePassword(string strPass)
+        {
+            bool isValid = false;
+            FormattedString fsError = new FormattedString();
+            fsError.Spans.Clear();
+            try
+            {
+                bool hasCapiAlpha = false, hasSmallAlpha = false, hasNumeric = false, hasSpecialChar = false, hasEnoughLength = false;
+                var charArrPass = strPass.ToCharArray();
+                if (strPass.Length >= 6 && strPass.Length <= 15)
+                {
+                    hasEnoughLength = true;
+                    foreach (var str in charArrPass)
+                    {
+                        if (Regex.IsMatch(str.ToString(), @"^([a-z])$"))
+                        {
+                            hasSmallAlpha = true;
+                        }
+                        else if (Regex.IsMatch(str.ToString(), @"^([A-Z])$"))
+                        {
+                            hasCapiAlpha = true;
+                        }
+                        else if (Regex.IsMatch(str.ToString(), @"^(\d)$"))
+                        {
+                            hasNumeric = true;
+                        }
+                        else if (Regex.IsMatch(str.ToString(), @"^([^\da-zA-Z])$"))
+                        {
+                            hasSpecialChar = true;
+                        }
+                        else
+                        {
+
+                        }
+
+                    }
+                }
+                else
+                {
+                    hasEnoughLength = false;
+                }
+                if (hasEnoughLength == false)
+                {
+                    isValid = false;
+                    fsError.Spans.Add(new Span { Text = "Text length should be from 6 - 15 characters", ForegroundColor = Color.Black });
+                    DisplayCustomAlert("Alert", fsError);
+                }
+                else if (hasSmallAlpha == false)
+                {
+                    isValid = false;
+                    fsError.Spans.Add(new Span { Text = "Must contain ", ForegroundColor = Color.Black });
+                    fsError.Spans.Add(new Span() { Text = "lowercase", ForegroundColor = AppGlobalVariables.orange });
+                    fsError.Spans.Add(new Span { Text = "/uppercase, numbers and possibly special characters", ForegroundColor = Color.Black });
+                    DisplayCustomAlert("Alert", fsError);
+                }
+                else if (hasCapiAlpha == false)
+                {
+                    isValid = false;
+                    fsError.Spans.Add(new Span { Text = "Must contain lowercase/", ForegroundColor = Color.Black });
+                    fsError.Spans.Add(new Span() { Text = "uppercase", ForegroundColor = AppGlobalVariables.orange });
+                    fsError.Spans.Add(new Span { Text = ", numbers and possibly special characters", ForegroundColor = Color.Black });
+                    DisplayCustomAlert("Alert", fsError);
+                }
+                else if (hasNumeric == false)
+                {
+                    isValid = false;
+                    fsError.Spans.Add(new Span { Text = "Must contain lowercase/uppercase, ", ForegroundColor = Color.Black });
+                    fsError.Spans.Add(new Span() { Text = "numbers", ForegroundColor = AppGlobalVariables.orange });
+                    fsError.Spans.Add(new Span { Text = " and possibly special characters", ForegroundColor = Color.Black });
+                    DisplayCustomAlert("Alert", fsError);
+                }
+                else if (hasSpecialChar == false)
+                {
+                    isValid = false;
+                    fsError.Spans.Add(new Span { Text = "Must contain lowercase/uppercase, numbers and possibly ", ForegroundColor = Color.Black });
+                    fsError.Spans.Add(new Span() { Text = "special characters", ForegroundColor = AppGlobalVariables.orange });
+                    DisplayCustomAlert("Alert", fsError);
+                }
+                else
+                {
+                    isValid = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+            }
+            return isValid;
+        }
+        #endregion
+
     }
 }

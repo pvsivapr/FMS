@@ -18,6 +18,7 @@ namespace FMS
             #region for local variables
             int height = (BaseContentPage.screenHeight * 1) / 100;
             int width = (BaseContentPage.screenWidth * 1) / 100;
+            bool isEditRent = false, isEditFleet = false, isEditOther = false;
             #endregion
 
             #region for Header
@@ -823,6 +824,7 @@ lblBackBtn
                                                                                                     btnFleetSubmit.IsVisible = false;
                                                                                                     frameFleetEdior.IsVisible = false;
                                                                                                     stackFleetBusiness.IsVisible = true;
+                                                                                                    //stackFleetChildren.IsVisible = false;
 
                                                                                                 };
 
@@ -1248,98 +1250,151 @@ lblBackBtn
                             }
                             else
                             {
-
-                                var lblAcntNo = new Label
+                                bool isDuplicate = false;
+                                if (RegisterStepOne.rso.truckData.Count != 0)
                                 {
-                                    Text = frameRentEdior.Text.ToString(),
-                                    HorizontalOptions = LayoutOptions.StartAndExpand
-                                };
-                                var imgAcntEdit = new Image
-                                {
-                                    Source = ImageSource.FromFile("imgEdit.png"),
-                                    HorizontalOptions = LayoutOptions.EndAndExpand
-                                };
-
-                                var stackAcc = new StackLayout
-                                {
-                                    Orientation = StackOrientation.Horizontal,
-                                    Children = { lblAcntNo, imgAcntEdit }
-                                };
-
-
-
-                                var entryEditRent = new CustomEntry
-                                {
-                                    HeightRequest = Device.OnPlatform(height * 7, height * 10, height * 7),
-                                    HorizontalOptions = LayoutOptions.FillAndExpand,
-                                };
-                                var imgRentTick = new Image
-                                {
-                                    Source = "tick.png"
-                                };
-                                var imgRentClose = new Image
-                                {
-                                    Source = "imgClose.png"
-                                };
-                                var stackEditRent = new StackLayout
-                                {
-                                    Orientation = StackOrientation.Horizontal,
-                                    HorizontalOptions = LayoutOptions.FillAndExpand,
-                                    IsVisible = false,
-                                    Children =
-                                     {
-                                        entryEditRent,imgTick,imgClose
+                                    foreach (var item in RegisterStepOne.rso.truckData)
+                                    {
+                                        if (item == frameRentEdior.Text)
+                                        {
+                                            isDuplicate = true;
                                         }
-                                };
+                                    }
+                                }
+                                if (isDuplicate == true)
+                                {
+                                    DisplayAlert("Alert", "Account number already exist.", "Cancel");
+                                }
+                                else
+                                {
 
-                                stackRentChildren.Children.Add(stackAcc);
+                                    //RentTruck(frameRentEdior.Text.ToString());
+                                    stackAcnt.IsVisible = true;
+                                    stackbtnRentSbumit.IsVisible = false;
+                                    stackRentDrive.IsVisible = false;
+                                    stackRentAdd.IsVisible = true;
 
-                                stackRentChildren.Children.Add(stackEditRent);
+                                    var lblAcntNo = new Label
+                                    {
+                                        Text = frameRentEdior.Text.ToString(),
+                                        HorizontalOptions = LayoutOptions.StartAndExpand
+                                    };
+                                    var imgAcntEdit = new Image
+                                    {
+                                        Source = ImageSource.FromFile("imgEdit.png"),
+                                        HorizontalOptions = LayoutOptions.EndAndExpand
+                                    };
 
-                                stackAcnt.IsVisible = true;
-                                stackbtnRentSbumit.IsVisible = false;
-                                stackRentDrive.IsVisible = false;
-                                stackRentAdd.IsVisible = true;
-                                RegisterStepOne.rso.truckData.Add(frameRentEdior.Text.ToString());
-
-                                TapGestureRecognizer gestures = new TapGestureRecognizer();
-                                gestures.Tapped += (sender, e) =>
-                                                                 {
-                                                                     stackEditRent.IsVisible = true;
-                                                                     stackAcc.IsVisible = false;
-                                                                     entryEditRent.Text = lblAcntNo.Text;
-                                                                     //DisplayAlert("Alert", lblAcntNo.Text, "OK");
-                                                                 };
-                                imgAcntEdit.GestureRecognizers.Add(gestures);
-
-                                TapGestureRecognizer gesturesRentTick = new TapGestureRecognizer();
-                                gesturesRentTick.Tapped += (sender, e) =>
-                                                                             {
-                                                                                 DisplayAlert("Alert", "tick", "OK");
-                                                                                 stackEditRent.IsVisible = false;
-                                                                                 stackAcc.IsVisible = true;
-                                                                                 lblAcntNo.Text = entryEditRent.Text;
-                                                                                 //          RegisterStepOne.rso.userP.employeeNumber = lblAcntNo.Text.ToString();
-
-                                                                             };
-                                imgRentTick.GestureRecognizers.Add(gesturesRentTick);
-
-
-                                TapGestureRecognizer gesturesRentClose = new TapGestureRecognizer();
-                                gesturesRentClose.Tapped += (sender, e) =>
-                                                                 {
-                                                                     DisplayAlert("Alert", "close", "OK");
-                                                                     stackEditRent.IsVisible = false;
-                                                                     stackAcc.IsVisible = true;
-                                                                     lblAcntNo.Text = entryEditRent.Text;
-                                                                     // RegisterStepOne.rso.userP.employeeNumber = lblAcntNo.Text.ToString();
-
-                                                                 };
-                                imgRentClose.GestureRecognizers.Add(gesturesRentClose);
+                                    var stackAcc = new StackLayout
+                                    {
+                                        Orientation = StackOrientation.Horizontal,
+                                        Children = { lblAcntNo, imgAcntEdit }
+                                    };
 
 
 
+                                    var entryEditRent = new CustomEntry
+                                    {
+                                        HeightRequest = Device.OnPlatform(height * 7, height * 10, height * 7),
+                                        HorizontalOptions = LayoutOptions.FillAndExpand,
+                                    };
+                                    var imgRentTick = new Image
+                                    {
+                                        Source = "tick.png"
+                                    };
+                                    var imgRentClose = new Image
+                                    {
+                                        Source = "imgClose.png"
+                                    };
+                                    var stackEditRent = new StackLayout
+                                    {
+                                        Orientation = StackOrientation.Horizontal,
+                                        HorizontalOptions = LayoutOptions.FillAndExpand,
+                                        IsVisible = false,
+                                        Children =
+                                         {
+                                            entryEditRent,imgRentTick,imgRentClose
+                                            }
+                                    };
+                                    stackRentChildren.Children.Add(stackAcc);
+                                    stackRentChildren.Children.Add(stackEditRent);
 
+                                    stackAcnt.IsVisible = true;
+                                    stackbtnRentSbumit.IsVisible = false;
+                                    stackRentDrive.IsVisible = false;
+                                    stackRentAdd.IsVisible = true;
+                                    RegisterStepOne.rso.truckData.Add(frameRentEdior.Text.ToString());
+
+                                    string strEditRent = "";
+                                    TapGestureRecognizer gestures = new TapGestureRecognizer();
+                                    gestures.Tapped += (sender, e) =>
+                                                                     {
+
+
+                                                                         if (isEditRent == false)
+                                                                         {
+                                                                             strEditRent = lblAcntNo.Text;
+                                                                             isEditRent = true;
+                                                                             stackEditRent.IsVisible = true;
+                                                                             stackAcc.IsVisible = false;
+                                                                             entryEditRent.Text = lblAcntNo.Text;
+                                                                         }
+                                                                         else
+                                                                         {
+                                                                             DisplayAlert("Alert", "You can edit only one item at a time", "OK");
+
+                                                                         }
+
+                                                                     };
+                                    imgAcntEdit.GestureRecognizers.Add(gestures);
+
+                                    TapGestureRecognizer gesturesRentTick = new TapGestureRecognizer();
+                                    gesturesRentTick.Tapped += (sender, e) =>
+                                                                                 {
+                                                                                     bool isDuplicateTick = false;
+                                                                                     if (RegisterStepOne.rso.truckData.Count != 0)
+                                                                                     {
+                                                                                         foreach (var item in RegisterStepOne.rso.truckData)
+                                                                                         {
+                                                                                             if (item == entryEditRent.Text)
+                                                                                             {
+                                                                                                 isDuplicateTick = true;
+                                                                                             }
+                                                                                         }
+                                                                                     }
+                                                                                     if (isDuplicateTick == true)
+                                                                                     {
+                                                                                         DisplayAlert("Alert", "Account number already exist.", "Cancel");
+                                                                                     }
+                                                                                     else
+                                                                                     {
+
+                                                                                         stackEditRent.IsVisible = false;
+                                                                                         stackAcc.IsVisible = true;
+                                                                                         lblAcntNo.Text = entryEditRent.Text;
+
+                                                                                         int index = RegisterStepOne.rso.truckData.IndexOf(frameRentEdior.Text.ToString());
+                                                                                         RegisterStepOne.rso.truckData.RemoveAt(index);
+                                                                                         RegisterStepOne.rso.truckData.Add(lblAcntNo.Text.ToString());
+                                                                                         isEditRent = false;
+                                                                                     }
+                                                                                 };
+                                    imgRentTick.GestureRecognizers.Add(gesturesRentTick);
+
+
+                                    TapGestureRecognizer gesturesRentClose = new TapGestureRecognizer();
+                                    gesturesRentClose.Tapped += (sender, e) =>
+                                                                    {
+                                                                        stackEditRent.IsVisible = false;
+                                                                        stackAcc.IsVisible = true;
+                                                                        isEditRent = false;
+                                                                        //lblAcntNo.Text = entryEditRent.Text;
+                                                                    };
+                                    imgRentClose.GestureRecognizers.Add(gesturesRentClose);
+
+
+
+                                }
                             }
                         };
 
@@ -1361,18 +1416,80 @@ lblBackBtn
                                    Source = ImageSource.FromFile("imgEdit.png"),
                                    HorizontalOptions = LayoutOptions.EndAndExpand
                                };
-                               TapGestureRecognizer gestures = new TapGestureRecognizer();
-                               gestures.Tapped += (sender, e) =>
-                                                                {
-                                                                    DisplayAlert("Alert", lblAcntNo.Text, "OK");
-                                                                };
-                               imgAcntEdit.GestureRecognizers.Add(gestures);
+
                                var stackAcc = new StackLayout
                                {
                                    Orientation = StackOrientation.Horizontal,
                                    Children = { lblAcntNo, imgAcntEdit }
                                };
-                               stackFleetChildren.Children.Add(stackAcc); stackFleetLessee.IsVisible = true;
+                               var entryEditFleet = new CustomEntry
+                               {
+                                   HeightRequest = Device.OnPlatform(height * 7, height * 10, height * 7),
+                                   HorizontalOptions = LayoutOptions.FillAndExpand,
+                               };
+                               var imgFleetTick = new Image
+                               {
+                                   Source = "tick.png"
+                               };
+                               var imgFleetClose = new Image
+                               {
+                                   Source = "imgClose.png"
+                               };
+                               var stackEditFleet = new StackLayout
+                               {
+                                   Orientation = StackOrientation.Horizontal,
+                                   HorizontalOptions = LayoutOptions.FillAndExpand,
+                                   IsVisible = false,
+                                   Children =
+                                         {
+                                            entryEditFleet,imgFleetTick,imgFleetClose
+                                          }
+                               };
+
+                               TapGestureRecognizer gestures = new TapGestureRecognizer();
+                               gestures.Tapped += (sender, e) =>
+                                           {
+                                               if (isEditFleet == false)
+                                               {
+
+                                                   isEditFleet = true;
+                                                   stackEditFleet.IsVisible = true;
+                                                   stackAcc.IsVisible = false;
+                                                   entryEditFleet.Text = lblAcntNo.Text;
+                                               }
+                                               else
+                                               {
+                                                   DisplayAlert("Alert", "You can edit only one item at a time", "OK");
+
+                                               }
+                                           };
+                               imgAcntEdit.GestureRecognizers.Add(gestures);
+
+                               TapGestureRecognizer gesturesFleetTick = new TapGestureRecognizer();
+                               gesturesFleetTick.Tapped += (sender, e) =>
+                                                    {
+                                                        stackEditFleet.IsVisible = false;
+                                                        stackAcc.IsVisible = true;
+                                                        lblAcntNo.Text = entryEditFleet.Text;
+                                                        RegisterStepOne.rso.fleetData.Add(lblAcntNo.Text.ToString());
+                                                        isEditFleet = false;
+                                                    };
+                               imgFleetTick.GestureRecognizers.Add(gesturesFleetTick);
+
+
+                               TapGestureRecognizer gesturesFleetClose = new TapGestureRecognizer();
+                               gesturesFleetClose.Tapped += (sender, e) =>
+                                                   {
+                                                       stackEditFleet.IsVisible = false;
+                                                       stackAcc.IsVisible = true;
+                                                       isEditFleet = false;
+
+                                                   };
+                               imgFleetClose.GestureRecognizers.Add(gesturesFleetClose);
+
+                               stackFleetChildren.Children.Add(stackAcc);
+                               stackFleetChildren.Children.Add(stackEditFleet);
+                               stackFleetLessee.IsVisible = true;
                                stackbtnFleetSbumit.IsVisible = false;
                                stackFleetDrive.IsVisible = false;
                                stackFleetAdd.IsVisible = true;
@@ -1399,18 +1516,81 @@ lblBackBtn
                                    Source = ImageSource.FromFile("imgEdit.png"),
                                    HorizontalOptions = LayoutOptions.EndAndExpand
                                };
-                               TapGestureRecognizer gestures = new TapGestureRecognizer();
-                               gestures.Tapped += (sender, e) =>
-                                                                                               {
-                                                                                                   DisplayAlert("Alert", lblAcntNo.Text, "OK");
-                                                                                               };
-                               imgAcntEdit.GestureRecognizers.Add(gestures);
+
                                var stackAcc = new StackLayout
                                {
                                    Orientation = StackOrientation.Horizontal,
                                    Children = { lblAcntNo, imgAcntEdit }
                                };
-                               stackOtherChildren.Children.Add(stackAcc); stackOtherLessee.IsVisible = true;
+                               var entryEditOther = new CustomEntry
+                               {
+                                   HeightRequest = Device.OnPlatform(height * 7, height * 10, height * 7),
+                                   HorizontalOptions = LayoutOptions.FillAndExpand
+                               };
+                               var imgOtherTick = new Image
+                               {
+                                   Source = "tick.png"
+                               };
+                               var imgOtherClose = new Image
+                               {
+                                   Source = "imgClose.png"
+                               };
+                               var stackEditOther = new StackLayout
+                               {
+                                   Orientation = StackOrientation.Horizontal,
+                                   HorizontalOptions = LayoutOptions.FillAndExpand,
+                                   IsVisible = false,
+                                   Children =
+                                         {
+                                            entryEditOther,imgOtherTick,imgOtherClose
+                                          }
+                               };
+
+                               TapGestureRecognizer gestures = new TapGestureRecognizer();
+                               gestures.Tapped += (sender, e) =>
+                                                  {
+                                                      if (isEditOther == false)
+                                                      {
+
+                                                          isEditOther = true;
+                                                          stackEditOther.IsVisible = true;
+                                                          stackAcc.IsVisible = false;
+                                                          entryEditOther.Text = lblAcntNo.Text;
+                                                      }
+                                                      else
+                                                      {
+                                                          DisplayAlert("Alert", "You can edit only one item at a time", "OK");
+
+                                                      }
+                                                  };
+                               imgAcntEdit.GestureRecognizers.Add(gestures);
+
+                               TapGestureRecognizer gesturesimgOtherTick = new TapGestureRecognizer();
+                               gesturesimgOtherTick.Tapped += (sender, e) =>
+                                                  {
+                                                      stackEditOther.IsVisible = false;
+                                                      stackAcc.IsVisible = true;
+                                                      lblAcntNo.Text = entryEditOther.Text;
+                                                      RegisterStepOne.rso.otherData.Add(lblAcntNo.Text.ToString());
+                                                      isEditOther = false;
+                                                  };
+                               imgOtherTick.GestureRecognizers.Add(gesturesimgOtherTick);
+
+
+                               TapGestureRecognizer gesturesimgOtherClose = new TapGestureRecognizer();
+                               gesturesimgOtherClose.Tapped += (sender, e) =>
+                                                                             {
+                                                                                 stackEditOther.IsVisible = false;
+                                                                                 stackAcc.IsVisible = true;
+                                                                                 isEditOther = false;
+                                                                             };
+                               imgOtherClose.GestureRecognizers.Add(gesturesimgOtherClose);
+
+
+
+                               stackOtherChildren.Children.Add(stackAcc);
+                               stackOtherChildren.Children.Add(stackEditOther);
+                               stackOtherLessee.IsVisible = true;
                                stackbtnOtherSbumit.IsVisible = false;
                                stackOtherDrive.IsVisible = false;
                                stackOtherAdd.IsVisible = true;
@@ -1426,6 +1606,7 @@ lblBackBtn
                     stackbtnRentSbumit.IsVisible = true;
                     frameRentEdior.Text = string.Empty;
                     stackRentAdd.IsVisible = false;
+                    frameRentEdior.Placeholder = "njabhcfx";
 
                 };
             stackRentAdd.GestureRecognizers.Add(lblRentAddMoreTap);
@@ -1484,7 +1665,7 @@ lblBackBtn
                                             stackimgEdit.IsVisible = true;
                                             stackEditSapNo.IsVisible = false;
                                             lblsapNo.Text = entryEditSapNo.Text;
-                                            //RegisterStepOne.rso.userP.employeeNumber = lblsapNo.Text.ToString();
+                                            RegisterStepOne.rso.userP.employeeNumber = lblsapNo.Text.ToString();
                                         };
             imgTick.GestureRecognizers.Add(imgTickTap);
 
@@ -1493,7 +1674,7 @@ lblBackBtn
                                                                 {
                                                                     stackimgEdit.IsVisible = true;
                                                                     stackEditSapNo.IsVisible = false;
-                                                                    //  RegisterStepOne.rso.userP.employeeNumber = lblsapNo.Text.ToString();
+                                                                    //    RegisterStepOne.rso.userP.employeeNumber = lblsapNo.Text.ToString();
                                                                 };
             imgClose.GestureRecognizers.Add(imgCloseTap);
 
@@ -1507,10 +1688,12 @@ lblBackBtn
                 stackbtnSbumit.IsVisible = false;
                 stackIDrive.IsVisible = false;
             }
+
             if (RegisterStepOne.rso.truckData.Count != 0)
             {
                 foreach (var item in RegisterStepOne.rso.truckData)
                 {
+                    //RentTruck(item.ToString());
                     var lblAcntNo = new Label
                     {
                         Text = item,
@@ -1521,18 +1704,99 @@ lblBackBtn
                         Source = ImageSource.FromFile("imgEdit.png"),
                         HorizontalOptions = LayoutOptions.EndAndExpand
                     };
-                    TapGestureRecognizer gestures = new TapGestureRecognizer();
-                    gestures.Tapped += (sender, e) =>
-                     {
-                         DisplayAlert("Alert", lblAcntNo.Text, "OK");
-                     };
-                    imgAcntEdit.GestureRecognizers.Add(gestures);
                     var stackAcc = new StackLayout
                     {
                         Orientation = StackOrientation.Horizontal,
                         Children = { lblAcntNo, imgAcntEdit }
                     };
                     stackRentChildren.Children.Add(stackAcc);
+                    var entryEditRent = new CustomEntry
+                    {
+                        HeightRequest = Device.OnPlatform(height * 7, height * 10, height * 7),
+                        HorizontalOptions = LayoutOptions.FillAndExpand,
+                    };
+                    var imgRentTick = new Image
+                    {
+                        Source = "tick.png"
+                    };
+                    var imgRentClose = new Image
+                    {
+                        Source = "imgClose.png"
+                    };
+                    var stackEditRent = new StackLayout
+                    {
+                        Orientation = StackOrientation.Horizontal,
+                        HorizontalOptions = LayoutOptions.FillAndExpand,
+                        IsVisible = false,
+                        Children =
+                                     {
+                                        entryEditRent,imgRentTick,imgRentClose
+                                        }
+                    };
+                    stackRentChildren.Children.Add(stackEditRent);
+                    TapGestureRecognizer gestures = new TapGestureRecognizer();
+                    gestures.Tapped += (sender, e) =>
+                                         {
+
+                                             if (isEditRent == false)
+                                             {
+                                                 isEditRent = true;
+                                                 stackEditRent.IsVisible = true;
+                                                 stackAcc.IsVisible = false;
+                                                 entryEditRent.Text = lblAcntNo.Text; ;
+                                             }
+                                             else
+                                             {
+                                                 DisplayAlert("Alert", "You can edit only one item at a time", "OK");
+
+                                             }
+
+
+                                         };
+                    imgAcntEdit.GestureRecognizers.Add(gestures);
+                    TapGestureRecognizer gesturesRentTick = new TapGestureRecognizer();
+                    gesturesRentTick.Tapped += (sender, e) =>
+                                                         {
+                                                             bool isDuplicate = false;
+                                                             if (RegisterStepOne.rso.truckData.Count != 0)
+                                                             {
+                                                                 foreach (var item1 in RegisterStepOne.rso.truckData)
+                                                                 {
+                                                                     if (item1 == entryEditRent.Text)
+                                                                     {
+                                                                         isDuplicate = true;
+                                                                     }
+                                                                 }
+                                                             }
+                                                             if (isDuplicate == true)
+                                                             {
+                                                                 DisplayAlert("Alert", "Account number already exist.", "Cancel");
+                                                             }
+                                                             else
+                                                             {
+                                                                 stackEditRent.IsVisible = false;
+                                                                 stackAcc.IsVisible = true;
+                                                                 lblAcntNo.Text = entryEditRent.Text;
+                                                                 // RegisterStepOne.rso.truckData.Add(lblAcntNo.Text.ToString());
+                                                                 int index = RegisterStepOne.rso.truckData.IndexOf(frameRentEdior.Text.ToString());
+                                                                 RegisterStepOne.rso.truckData.RemoveAt(index);
+                                                                 RegisterStepOne.rso.truckData.Add(lblAcntNo.Text.ToString());
+                                                                 isEditRent = false;
+                                                             }
+
+                                                         };
+                    imgRentTick.GestureRecognizers.Add(gesturesRentTick);
+
+
+                    TapGestureRecognizer gesturesRentClose = new TapGestureRecognizer();
+                    gesturesRentClose.Tapped += (sender, e) =>
+                                                    {
+                                                        isEditRent = false;
+                                                        stackEditRent.IsVisible = false;
+                                                        stackAcc.IsVisible = true;
+                                                    };
+                    imgRentClose.GestureRecognizers.Add(gesturesRentClose);
+
                 }
                 imgRentCheck.Source = ImageSource.FromFile("Checked.png");
                 stackAcnt.IsVisible = true;
@@ -1554,18 +1818,80 @@ lblBackBtn
                         Source = ImageSource.FromFile("imgEdit.png"),
                         HorizontalOptions = LayoutOptions.EndAndExpand
                     };
-                    TapGestureRecognizer gestures = new TapGestureRecognizer();
-                    gestures.Tapped += (sender, e) =>
-                                                     {
-                                                         DisplayAlert("Alert", lblAcntNo.Text, "OK");
-                                                     };
-                    imgAcntEdit.GestureRecognizers.Add(gestures);
                     var stackAcc = new StackLayout
                     {
                         Orientation = StackOrientation.Horizontal,
                         Children = { lblAcntNo, imgAcntEdit }
                     };
+                    var entryEditFleet = new CustomEntry
+                    {
+                        HeightRequest = Device.OnPlatform(height * 7, height * 10, height * 7),
+                        HorizontalOptions = LayoutOptions.FillAndExpand
+                    };
+                    var imgFleetTick = new Image
+                    {
+                        Source = "tick.png"
+                    };
+                    var imgFleetClose = new Image
+                    {
+                        Source = "imgClose.png"
+                    };
+                    var stackEditFleet = new StackLayout
+                    {
+                        Orientation = StackOrientation.Horizontal,
+                        HorizontalOptions = LayoutOptions.FillAndExpand,
+                        IsVisible = false,
+                        Children =
+                                         {
+                                            entryEditFleet,imgFleetTick,imgFleetClose
+                                          }
+                    };
+
+                    TapGestureRecognizer gestures = new TapGestureRecognizer();
+                    gestures.Tapped += (sender, e) =>
+                                                               {
+                                                                   if (isEditFleet == false)
+                                                                   {
+
+                                                                       isEditFleet = true;
+                                                                       stackEditFleet.IsVisible = true;
+                                                                       stackAcc.IsVisible = false;
+                                                                       entryEditFleet.Text = lblAcntNo.Text;
+                                                                   }
+                                                                   else
+                                                                   {
+                                                                       DisplayAlert("Alert", "You can edit only one item at a time", "OK");
+
+                                                                   }
+                                                               };
+                    imgAcntEdit.GestureRecognizers.Add(gestures);
+
+                    TapGestureRecognizer gesturesFleetTick = new TapGestureRecognizer();
+                    gesturesFleetTick.Tapped += (sender, e) =>
+                                                                        {
+                                                                            stackEditFleet.IsVisible = false;
+                                                                            stackAcc.IsVisible = true;
+                                                                            lblAcntNo.Text = entryEditFleet.Text;
+                                                                            RegisterStepOne.rso.fleetData.Add(lblAcntNo.Text.ToString());
+                                                                            isEditFleet = false;
+                                                                        };
+                    imgFleetTick.GestureRecognizers.Add(gesturesFleetTick);
+
+
+                    TapGestureRecognizer gesturesFleetClose = new TapGestureRecognizer();
+                    gesturesFleetClose.Tapped += (sender, e) =>
+                                                                       {
+                                                                           stackEditFleet.IsVisible = false;
+                                                                           stackAcc.IsVisible = true;
+                                                                           isEditFleet = false;
+
+                                                                       };
+                    imgFleetClose.GestureRecognizers.Add(gesturesFleetClose);
+
+
+
                     stackFleetChildren.Children.Add(stackAcc);
+                    stackFleetChildren.Children.Add(stackEditFleet);
                 }
                 imgFleetCheck.Source = ImageSource.FromFile("Checked.png");
                 stackFleetLessee.IsVisible = true;
@@ -1588,17 +1914,77 @@ lblBackBtn
                         Source = ImageSource.FromFile("imgEdit.png"),
                         HorizontalOptions = LayoutOptions.EndAndExpand
                     };
-                    TapGestureRecognizer gestures = new TapGestureRecognizer();
-                    gestures.Tapped += (sender, e) =>
-                                                                                    {
-                                                                                        DisplayAlert("Alert", lblAcntNo.Text, "OK");
-                                                                                    };
-                    imgAcntEdit.GestureRecognizers.Add(gestures);
+
                     var stackAcc = new StackLayout
                     {
                         Orientation = StackOrientation.Horizontal,
                         Children = { lblAcntNo, imgAcntEdit }
                     };
+                    var entryEditOther = new CustomEntry
+                    {
+                        HeightRequest = Device.OnPlatform(height * 7, height * 10, height * 7),
+                        HorizontalOptions = LayoutOptions.FillAndExpand
+                    };
+                    var imgOtherTick = new Image
+                    {
+                        Source = "tick.png"
+                    };
+                    var imgOtherClose = new Image
+                    {
+                        Source = "imgClose.png"
+                    };
+                    var stackEditOther = new StackLayout
+                    {
+                        Orientation = StackOrientation.Horizontal,
+                        HorizontalOptions = LayoutOptions.FillAndExpand,
+                        IsVisible = false,
+                        Children =
+                                         {
+                                            entryEditOther,imgOtherTick,imgOtherClose
+                                          }
+                    };
+
+                    TapGestureRecognizer gestures = new TapGestureRecognizer();
+                    gestures.Tapped += (sender, e) =>
+                                                                      {
+                                                                          if (isEditOther == false)
+                                                                          {
+
+                                                                              isEditOther = true;
+                                                                              stackEditOther.IsVisible = true;
+                                                                              stackAcc.IsVisible = false;
+                                                                              entryEditOther.Text = lblAcntNo.Text;
+                                                                          }
+                                                                          else
+                                                                          {
+                                                                              DisplayAlert("Alert", "You can edit only one item at a time", "OK");
+
+                                                                          }
+                                                                      };
+                    imgAcntEdit.GestureRecognizers.Add(gestures);
+
+                    TapGestureRecognizer gesturesimgOtherTick = new TapGestureRecognizer();
+                    gesturesimgOtherTick.Tapped += (sender, e) =>
+                                                                      {
+                                                                          stackEditOther.IsVisible = false;
+                                                                          stackAcc.IsVisible = true;
+                                                                          lblAcntNo.Text = entryEditOther.Text;
+                                                                          RegisterStepOne.rso.otherData.Add(lblAcntNo.Text.ToString());
+                                                                          isEditOther = false;
+                                                                      };
+                    imgOtherTick.GestureRecognizers.Add(gesturesimgOtherTick);
+
+
+                    TapGestureRecognizer gesturesimgOtherClose = new TapGestureRecognizer();
+                    gesturesimgOtherClose.Tapped += (sender, e) =>
+                                                                                                 {
+                                                                                                     stackEditOther.IsVisible = false;
+                                                                                                     stackAcc.IsVisible = true;
+                                                                                                     isEditOther = false;
+                                                                                                 };
+                    imgOtherClose.GestureRecognizers.Add(gesturesimgOtherClose);
+
+                    stackFleetChildren.Children.Add(stackEditOther);
                     stackOtherChildren.Children.Add(stackAcc);
                 }
                 stackOtherLessee.IsVisible = true;
@@ -1609,7 +1995,107 @@ lblBackBtn
             }
             #endregion
 
+
+
             Content = stackMain;
         }
+
+        public void RentTruck(string strAccNo)
+        {
+            int height = (BaseContentPage.screenHeight * 1) / 100;
+            var lblAcntNo = new Label
+            {
+                Text = strAccNo,
+                HorizontalOptions = LayoutOptions.StartAndExpand
+            };
+            var imgAcntEdit = new Image
+            {
+                Source = ImageSource.FromFile("imgEdit.png"),
+                HorizontalOptions = LayoutOptions.EndAndExpand
+            };
+
+            var stackAcc = new StackLayout
+            {
+                Orientation = StackOrientation.Horizontal,
+                Children = { lblAcntNo, imgAcntEdit }
+            };
+
+
+
+            var entryEditRent = new CustomEntry
+            {
+                HeightRequest = Device.OnPlatform(height * 7, height * 10, height * 7),
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+            };
+            var imgRentTick = new Image
+            {
+                Source = "tick.png"
+            };
+            var imgRentClose = new Image
+            {
+                Source = "imgClose.png"
+            };
+            var stackEditRent = new StackLayout
+            {
+                Orientation = StackOrientation.Horizontal,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                IsVisible = false,
+                Children =
+                                     {
+                                        entryEditRent,imgRentTick,imgRentClose
+                                        }
+            };
+
+            var stackFinal = new StackLayout
+            {
+                Children =
+                                        {
+                                           stackAcc,stackEditRent
+                                         }
+            };
+
+            stackRentChildren.Children.Add(stackAcc);
+
+            stackRentChildren.Children.Add(stackEditRent);
+
+
+            RegisterStepOne.rso.truckData.Add(strAccNo);
+
+            TapGestureRecognizer gestures = new TapGestureRecognizer();
+            gestures.Tapped += (sender, e) =>
+                                                                             {
+                                                                                 stackEditRent.IsVisible = true;
+                                                                                 stackAcc.IsVisible = false;
+                                                                                 entryEditRent.Text = lblAcntNo.Text;
+                                                                             };
+            imgAcntEdit.GestureRecognizers.Add(gestures);
+
+            TapGestureRecognizer gesturesRentTick = new TapGestureRecognizer();
+            gesturesRentTick.Tapped += (sender, e) =>
+                                                                                         {
+                                                                                             stackEditRent.IsVisible = false;
+                                                                                             stackAcc.IsVisible = true;
+                                                                                             lblAcntNo.Text = entryEditRent.Text;
+                                                                                             RegisterStepOne.rso.truckData.Add(lblAcntNo.Text.ToString());
+
+                                                                                         };
+            imgRentTick.GestureRecognizers.Add(gesturesRentTick);
+
+
+            TapGestureRecognizer gesturesRentClose = new TapGestureRecognizer();
+            gesturesRentClose.Tapped += (sender, e) =>
+                                                                            {
+                                                                                stackEditRent.IsVisible = false;
+                                                                                stackAcc.IsVisible = true;
+                                                                                //lblAcntNo.Text = entryEditRent.Text;
+                                                                            };
+            imgRentClose.GestureRecognizers.Add(gesturesRentClose);
+
+
+            var imgRentCloseTap = new TapGestureRecognizer();
+
+
+        }
     }
+
 }
