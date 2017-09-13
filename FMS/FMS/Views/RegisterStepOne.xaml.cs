@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Text.RegularExpressions;
 using Xamarin.Forms;
 
@@ -19,8 +20,9 @@ namespace FMS
             int width = (screenWidth * 1) / 100;
             List<string> listMobileType = new List<string>()
             {
-                "Mobile", "Land Line", "Office"
+                "Mobile", "Home", "Work"
             };
+            string mobileType = "Mobile", fuelPref = "Diesel";
             userRR = new UserRegistrationRequest();
             userP = new UserProfile();
             userE = new Entitlements();
@@ -29,7 +31,7 @@ namespace FMS
             otherData = new List<string>();
             #endregion
 
-            InitializeComponent();
+            //InitializeComponent();
             rso = this;
 
             #region for Custom Style
@@ -246,6 +248,7 @@ namespace FMS
                 Placeholder = "[EMAIL ADDRESS]*",
                 BorderColors = AppGlobalVariables.EntryBorderColor,
                 Keyboard = Keyboard.Email,
+                IsEmail = true,
                 Style = (Style)Resources["styleEntryInput"]
             };
             //CustomPhoneEntry entryUPhone = new CustomPhoneEntry()
@@ -260,6 +263,7 @@ namespace FMS
                 Placeholder = "[PHONE NUMBER]*",
                 BorderColors = AppGlobalVariables.EntryBorderColor,
                 Keyboard = Keyboard.Telephone,
+                IsPhoneNumber = true,
                 Style = (Style)Resources["styleEntryInput"]
             };
             Image imgDropDown = new Image()
@@ -294,6 +298,7 @@ namespace FMS
                 Placeholder = "[ZIP]",
                 BorderColors = AppGlobalVariables.EntryBorderColor,
                 Keyboard = Keyboard.Numeric,
+                IsNumeric = true,
                 Style = (Style)Resources["styleEntryInput"]
             };
 
@@ -345,7 +350,7 @@ namespace FMS
             };
             Label lblUnleaded = new Label()
             {
-                Text = "UnLeaded",
+                Text = "Unleaded",
                 FontSize = height * 2.5,
                 TextColor = AppGlobalVariables.Black,
                 HorizontalOptions = LayoutOptions.Start,
@@ -395,7 +400,7 @@ namespace FMS
             };
             Label lblCommunications = new Label()
             {
-                Text = "I'll like to receive communications\nfrom Ryder",
+                Text = "I'd like to receive communications from Ryder.",
                 FontSize = height * 2.9,
                 TextColor = AppGlobalVariables.Black,
                 HorizontalOptions = LayoutOptions.Start,
@@ -413,7 +418,7 @@ namespace FMS
 
             Image imgT_C = new Image()
             {
-                Source = ImageSource.FromFile("Checked.png"),
+                Source = ImageSource.FromFile("Unchecked.png"),
                 HeightRequest = height * 5,
                 WidthRequest = height * 5,
                 HorizontalOptions = LayoutOptions.Center,
@@ -421,14 +426,14 @@ namespace FMS
             };
             CustomUlineLabel lblT_C = new CustomUlineLabel()
             {
-                Text = "I accept all the terms and conditions of Ryder app",
+                Text = "Use of this site constitutes your agreement to terms of use",
                 FontSize = Device.OnPlatform(height * 2, height * 2.5, height * 3),
-                StartIndex = 17,
-                EndIndex = 37,
-                NoOfChar = 20,
+                StartIndex = 47,
+                EndIndex = 59,
+                NoOfChar = 12,
                 ShallUnderLine = true,
                 TextColor = AppGlobalVariables.Black,
-                HeightRequest = height * 5,
+                HeightRequest = height * 6,
                 Margin = new Thickness(0, Device.OnPlatform(height * 0, height * 1.25, height * 2), 0, 0),
                 VerticalTextAlignment = TextAlignment.Center,
                 HorizontalOptions = LayoutOptions.Start,
@@ -587,9 +592,29 @@ namespace FMS
                 var owner = (CustomEntry)sender;
                 try
                 {
-                    if (entryUPhone.IsFocused == true && entryUPhone.Text.Length < 3)
+                    var str = entryUPhone.Text.Substring(0, 3);
+                    if (entryUPhone.IsFocused == true)
                     {
-                        entryUPhone.Text = "+1 ";
+                        if (entryUPhone.Text.Length < 3)
+                        {
+                            entryUPhone.Text = "+1 ";
+                        }
+                        else if (entryUPhone.Text.Substring(0, 3) != "+1 ")
+                        {
+
+                            //if (entryUPhone.Text.Substring(0, 1) != "+")
+                            //{
+                            //    entryUPhone.Text = "+" + entryUPhone.Text;
+                            //}
+                            //if (entryUPhone.Text.Substring(1, 2) != "1")
+                            //{
+                            //    entryUPhone.Text = "1" + entryUPhone.Text;
+                            //}
+                            //if (entryUPhone.Text.Substring(2, 3) != " ")
+                            //{
+                            //    entryUPhone.Text = " " + entryUPhone.Text;
+                            //}
+                        }
                     }
                     if (entryUPhone.Text.Length > 15)
                     {
@@ -658,6 +683,57 @@ namespace FMS
             };
             #endregion
 
+            #region for First Name Text Entry
+            entryUFirstName.TextChanged += (object sender, TextChangedEventArgs e) =>
+            {
+                try
+                {
+                    if (entryUFirstName.Text.Length > 30)
+                    {
+                        entryUFirstName.Text = entryUFirstName.Text.Remove(entryUFirstName.Text.Length - 1);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var msg = ex.Message;
+                }
+            };
+            #endregion
+
+            #region for Last Name Text Entry
+            entryULastName.TextChanged += (object sender, TextChangedEventArgs e) =>
+            {
+                try
+                {
+                    if (entryULastName.Text.Length > 30)
+                    {
+                        entryULastName.Text = entryULastName.Text.Remove(entryULastName.Text.Length - 1);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var msg = ex.Message;
+                }
+            };
+            #endregion
+
+            #region for Email Text Entry
+            entryUEmail.TextChanged += (object sender, TextChangedEventArgs e) =>
+            {
+                try
+                {
+                    if (entryUEmail.Text.Length > 50)
+                    {
+                        entryUEmail.Text = entryUEmail.Text.Remove(entryUEmail.Text.Length - 1);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var msg = ex.Message;
+                }
+            };
+            #endregion
+
             #region for picker Selection Event
             PickerUMobile.SelectedIndexChanged += (object sender, EventArgs e) =>
             {
@@ -665,7 +741,7 @@ namespace FMS
                 {
                     if (PickerUMobile.SelectedIndex != -1)
                     {
-                        var statesName = (string)PickerUMobile.SelectedItem;
+                        mobileType = (string)PickerUMobile.SelectedItem;
                     }
                     else
                     {
@@ -695,8 +771,8 @@ namespace FMS
             };
             #endregion
 
-            #region for terms and conditions
-            bool t_c_Checked = true;
+            #region for Terms and conditions
+            bool t_c_Checked = false;
             TapGestureRecognizer t_cTappedEvent = new TapGestureRecognizer();
             t_cTappedEvent.NumberOfTapsRequired = 1;
             t_cTappedEvent.Tapped += (object sender, EventArgs e) =>
@@ -726,18 +802,21 @@ namespace FMS
                     imgCheckDiesel.Source = ImageSource.FromFile("imgRadioYes.png");
                     imgCheckUnleaded.Source = ImageSource.FromFile("imgRadioNo.png");
                     imgCheckCNG.Source = ImageSource.FromFile("imgRadioNo.png");
+                    fuelPref = "Diesel";
                 }
                 else if (imgCheckUnleaded == owner)
                 {
                     imgCheckDiesel.Source = ImageSource.FromFile("imgRadioNo.png");
                     imgCheckUnleaded.Source = ImageSource.FromFile("imgRadioYes.png");
                     imgCheckCNG.Source = ImageSource.FromFile("imgRadioNo.png");
+                    fuelPref = "Unleaded";
                 }
                 else if (imgCheckCNG == owner)
                 {
                     imgCheckDiesel.Source = ImageSource.FromFile("imgRadioNo.png");
                     imgCheckUnleaded.Source = ImageSource.FromFile("imgRadioNo.png");
                     imgCheckCNG.Source = ImageSource.FromFile("imgRadioYes.png");
+                    fuelPref = "CNG";
                 }
                 else
                 {
@@ -764,15 +843,15 @@ namespace FMS
                         entryUFirstName.Text = entryUFirstName.Text + " ";
                         entryUFirstName.Text = entryUFirstName.Text.Remove(entryUFirstName.Text.Length - 1);
                         scrollHolder.ScrollToAsync(entryUFirstName, ScrollToPosition.Center, true);
-                        DisplayThisAlert("The first name Cannot be empty");
+                        DisplayThisAlert("First name cannot be empty.");
                     }
-                    else if (entryUFirstName.Text.Length > 50)
+                    else if (entryUFirstName.Text.Length > 30)
                     {
                         entryUFirstName.BorderColors = AppGlobalVariables.EntryBorderErrorColor;
                         entryUFirstName.Text = entryUFirstName.Text + " ";
                         entryUFirstName.Text = entryUFirstName.Text.Remove(entryUFirstName.Text.Length - 1);
                         scrollHolder.ScrollToAsync(entryUFirstName, ScrollToPosition.Center, true);
-                        DisplayThisAlert("First name should be all Alpha. No special characters (except space) or numbers, Max character 50");
+                        DisplayThisAlert("First name should be all alphabets. No special characters (except space) or numbers, Max characters are 50.");
                     }
                     else if (!Regex.IsMatch(entryUFirstName.Text, @"^[a-zA-Z\s]{1,}$"))
                     {
@@ -780,7 +859,7 @@ namespace FMS
                         entryUFirstName.Text = entryUFirstName.Text + " ";
                         entryUFirstName.Text = entryUFirstName.Text.Remove(entryUFirstName.Text.Length - 1);
                         scrollHolder.ScrollToAsync(entryUFirstName, ScrollToPosition.Center, true);
-                        DisplayThisAlert("First name should be all Alpha. No special characters (except space) or numbers, Max character 50");
+                        DisplayThisAlert("First name should be all alphabets. No special characters (except space) or numbers, Max characters are 50.");
                     }
                     else if (string.IsNullOrEmpty(entryULastName.Text))
                     {
@@ -788,15 +867,15 @@ namespace FMS
                         entryULastName.Text = entryULastName.Text + " ";
                         entryULastName.Text = entryULastName.Text.Remove(entryULastName.Text.Length - 1);
                         scrollHolder.ScrollToAsync(entryULastName, ScrollToPosition.Center, true);
-                        DisplayThisAlert("The last name Cannot be empty");
+                        DisplayThisAlert("Last name cannot be empty.");
                     }
-                    else if (entryULastName.Text.Length > 50)
+                    else if (entryULastName.Text.Length > 30)
                     {
                         entryULastName.BorderColors = AppGlobalVariables.EntryBorderErrorColor;
                         entryULastName.Text = entryULastName.Text + " ";
                         entryULastName.Text = entryULastName.Text.Remove(entryULastName.Text.Length - 1);
                         scrollHolder.ScrollToAsync(entryULastName, ScrollToPosition.Center, true);
-                        DisplayThisAlert("Last name should be all Alpha. No special characters (except space) or numbers, Max character 50");
+                        DisplayThisAlert("Last name should be all alphabets. No special characters (except space) or numbers, Max characters are 50.");
                     }
                     else if (!Regex.IsMatch(entryULastName.Text, @"^^[a-zA-Z\s]{1,}$"))
                     {
@@ -804,7 +883,7 @@ namespace FMS
                         entryULastName.Text = entryULastName.Text + " ";
                         entryULastName.Text = entryULastName.Text.Remove(entryULastName.Text.Length - 1);
                         scrollHolder.ScrollToAsync(entryULastName, ScrollToPosition.Center, true);
-                        DisplayThisAlert("Last name should be all Alpha. No special characters (except space) or numbers, Max character 50");
+                        DisplayThisAlert("Last name should be all alphabets. No special characters (except space) or numbers, Max characters are 50.");
                     }
                     else if (string.IsNullOrEmpty(entryUEmail.Text))
                     {
@@ -812,21 +891,29 @@ namespace FMS
                         entryUEmail.Text = entryUEmail.Text + " ";
                         entryUEmail.Text = entryUEmail.Text.Remove(entryUEmail.Text.Length - 1);
                         scrollHolder.ScrollToAsync(entryUEmail, ScrollToPosition.Center, true);
-                        DisplayThisAlert("The email Cannot be empty");
+                        DisplayThisAlert("Email address cannot be empty.");
                     }
-                    else if (!Regex.IsMatch(entryUEmail.Text.Trim(), @"^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$"))
+                    else if (entryUEmail.Text.Length > 50)
                     {
                         entryUEmail.BorderColors = AppGlobalVariables.EntryBorderErrorColor;
                         entryUEmail.Text = entryUEmail.Text + " ";
                         entryUEmail.Text = entryUEmail.Text.Remove(entryUEmail.Text.Length - 1);
                         scrollHolder.ScrollToAsync(entryUEmail, ScrollToPosition.Center, true);
-                        DisplayThisAlert("Enter a valid email id");
+                        DisplayThisAlert("Email address text length should not be more than 50 characters.");
+                    }
+                    else if (!Regex.IsMatch(entryUEmail.Text.Trim(), @"^([a-zA-Z_])([a-zA-Z0-9_\-\.]*)@(\[((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}|((([a-zA-Z0-9\-]+)\.)+))([a-zA-Z]{2,}|(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\])$"))
+                    {
+                        entryUEmail.BorderColors = AppGlobalVariables.EntryBorderErrorColor;
+                        entryUEmail.Text = entryUEmail.Text + " ";
+                        entryUEmail.Text = entryUEmail.Text.Remove(entryUEmail.Text.Length - 1);
+                        scrollHolder.ScrollToAsync(entryUEmail, ScrollToPosition.Center, true);
+                        DisplayThisAlert("Enter a valid email address.");
                     }
                     else if (string.IsNullOrEmpty(entryUPhone.Text))
                     {
                         entryUPhone.BorderColors = AppGlobalVariables.EntryBorderErrorColor;
                         entryUPhone.Text = entryUPhone.Text + " ";
-                        DisplayThisAlert("The phone number cannot be empty");
+                        DisplayThisAlert("Phone number cannot be empty.");
                         if (entryUPhone.Text.Length < 15)
                         {
                             entryUPhone.Text = entryUPhone.Text.Remove(entryUPhone.Text.Length - 1);
@@ -841,7 +928,7 @@ namespace FMS
                     {
                         entryUPhone.BorderColors = AppGlobalVariables.EntryBorderErrorColor;
                         entryUPhone.Text = entryUPhone.Text + " ";
-                        DisplayThisAlert("Mobile number format: +1 XXX-XXX-XXXX");
+                        DisplayThisAlert("Mobile number format: +1 XXX-XXX-XXXX.");
                         if (entryUPhone.Text.Length < 15)
                         {
                             entryUPhone.Text = entryUPhone.Text.Remove(entryUPhone.Text.Length - 1);
@@ -856,7 +943,7 @@ namespace FMS
                     {
                         entryUZIP.BorderColors = AppGlobalVariables.EntryBorderErrorColor;
                         entryUZIP.Text = entryUZIP.Text + " ";
-                        DisplayThisAlert("Enter a valid ZIP code");
+                        DisplayThisAlert("Enter a valid ZIP code.");
                         if (entryUZIP.Text.Length < 5)
                         {
                             entryUZIP.Text = entryUZIP.Text.Remove(entryUZIP.Text.Length - 1);
@@ -872,7 +959,7 @@ namespace FMS
                     {
                         entryUZIP.BorderColors = AppGlobalVariables.EntryBorderErrorColor;
                         entryUZIP.Text = entryUZIP.Text + " ";
-                        DisplayThisAlert("Enter a valid ZIP code");
+                        DisplayThisAlert("Enter a valid ZIP code.");
                         if (entryUZIP.Text.Length < 5)
                         {
                             entryUZIP.Text = entryUZIP.Text.Remove(entryUZIP.Text.Length - 1);
@@ -886,14 +973,45 @@ namespace FMS
                     }
                     else if (t_c_Checked == false)
                     {
-                        DisplayThisAlert("You must accept the terms and conditions of Ryder app");
+                        DisplayThisAlert("You must accept the terms and conditions.");
                     }
                     else
                     {
+                        Constants.Apiurl_Extended_userId = WebUtility.UrlEncode(entryUEmail.Text);
+
+                        userP.application = "mobFleetApp";
                         userP.givenName = entryUFirstName.Text;
                         userP.sn = entryULastName.Text;
                         userP.mail = entryUEmail.Text;
+                        switch (mobileType)
+                        {
+                            case "Mobile":
+                                userP.mobile = entryUPhone.Text;
+                                userP.homePhoneNumber = "";
+                                userP.telephoneNumber = "";
+                                break;
+                            case "Home":
+                                userP.mobile = "";
+                                userP.homePhoneNumber = entryUPhone.Text;
+                                userP.telephoneNumber = "";
+                                break;
+                            case "Work":
+                                userP.mobile = "";
+                                userP.homePhoneNumber = "";
+                                userP.telephoneNumber = entryUPhone.Text;
+                                break;
+                            default:
+                                userP.mobile = entryUPhone.Text;
+                                userP.homePhoneNumber = "";
+                                userP.telephoneNumber = "";
+                                break;
+                        }
+                        userP.Company_entered_byUser = entryUBusiness.Text ?? "";
+                        userP.Company_Zip = entryUZIP.Text ?? "";
+                        userP.Fuel_Preference = fuelPref;
+                        userP.Receive_Ryder_Communication = (switchCommunications.IsToggled) ? "1" : "0";
 
+                        userE.MobFleetApp = "1";
                         userE.FIS_Rental = truckData;
                         userE.lessee = fleetData;
 

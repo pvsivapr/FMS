@@ -13,7 +13,7 @@ namespace FMS
 
         public RegisterStepTwo()
         {
-            InitializeComponent();
+            //InitializeComponent();
 
             #region for local variables
             int height = (BaseContentPage.screenHeight * 1) / 100;
@@ -35,9 +35,17 @@ namespace FMS
                 FontSize = Device.OnPlatform(height * 2.3, height * 2.5, height * 2.5),
                 TextColor = AppGlobalVariables.Black,
                 HorizontalTextAlignment = TextAlignment.Start,
-                VerticalTextAlignment = TextAlignment.Center,
+                VerticalTextAlignment = TextAlignment.Start,
                 HorizontalOptions = LayoutOptions.StartAndExpand,
                 VerticalOptions = LayoutOptions.FillAndExpand
+            };
+            var stakBack = new StackLayout
+            {
+                Padding = new Thickness(0, 5, 0, 5),
+                Children =
+                {
+lblBackBtn
+                }
             };
             Label lblTitle = new Label()
             {
@@ -47,7 +55,7 @@ namespace FMS
                 FontAttributes = FontAttributes.Bold,
                 FontSize = Device.OnPlatform(height * 3, height * 3, height * 3),
                 TextColor = AppGlobalVariables.Black,
-                HorizontalTextAlignment = TextAlignment.Start,
+                HorizontalTextAlignment = TextAlignment.Center,
                 VerticalTextAlignment = TextAlignment.Center,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
                 VerticalOptions = LayoutOptions.CenterAndExpand
@@ -69,7 +77,7 @@ namespace FMS
             };
             var lblDes = new Label
             {
-                Text = "Telling us about yourself  will help us tallor the app to your needs.",
+                Text = "Telling us about yourself will help us tailor the app to your needs.",
                 HorizontalOptions = LayoutOptions.StartAndExpand
             };
 
@@ -89,12 +97,12 @@ namespace FMS
                 },
                 RowSpacing = 0,
                 Padding = new Thickness(0, 0, 0, 0),
-                HeightRequest = height * 5,
+                HeightRequest = height * 10,
                 BackgroundColor = Color.Transparent,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.Start
             };
-            gridHeader.Children.Add(lblBackBtn, 1, 0);
+            gridHeader.Children.Add(stakBack, 1, 0);
             gridHeader.Children.Add(lblTitle, 2, 0);
             //gridHeader.Children.Add(lblTellme, 0, 5, 1, 2);
 
@@ -111,7 +119,7 @@ namespace FMS
             var lbldriveRyder = new Label
             {
                 HorizontalOptions = LayoutOptions.Start,
-                Text = "Do you drive for Ryder?",
+                Text = "Do you drive for Ryder?*",
                 TextColor = AppGlobalVariables.Black,
                 VerticalTextAlignment = TextAlignment.Center,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(CustomEntry)),
@@ -218,6 +226,37 @@ namespace FMS
                 Source = "imgEdit"
             };
 
+            var entryEditSapNo = new CustomEntry
+            {
+                HeightRequest = Device.OnPlatform(height * 7, height * 10, height * 7),
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+            };
+            var imgTick = new Image
+            {
+                Source = "tick.png"
+            };
+            var imgClose = new Image
+            {
+                Source = "imgClose.png"
+            };
+            var stackEditSapNo = new StackLayout
+            {
+                Orientation = StackOrientation.Horizontal,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                IsVisible = false,
+                Children =
+                {
+                  entryEditSapNo,imgTick,imgClose
+                }
+            };
+            var stackimgEdit = new StackLayout
+            {
+                Orientation = StackOrientation.Horizontal,
+                Children =
+                        {
+                            lblsapNo,imgSapEdit
+                        }
+            };
             var stackSap = new StackLayout
             {
                 Padding = new Thickness(30, 0, 20, 0),
@@ -225,14 +264,8 @@ namespace FMS
                 Children =
                 {
                    lblRederSapNum,
-                    new StackLayout
-                    {
-                        Orientation=StackOrientation.Horizontal,
-                        Children=
-                        {
-                            lblsapNo,imgSapEdit
-                        }
-                    }
+                   stackimgEdit,
+                   stackEditSapNo
                 }
             };
 
@@ -374,7 +407,7 @@ namespace FMS
             var lblRentRyder = new Label
             {
                 HorizontalOptions = LayoutOptions.Start,
-                Text = "Do you rent form Ryder?",
+                Text = "Do you rent from Ryder?*",
                 TextColor = AppGlobalVariables.Black,
                 VerticalTextAlignment = TextAlignment.Center,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(CustomEntry)),
@@ -614,7 +647,7 @@ namespace FMS
             var lblFleetRyder = new Label
             {
                 HorizontalOptions = LayoutOptions.Start,
-                Text = "Do you use Ryder to manage \nfleet ?",
+                Text = "Do you use Ryder to manage \nfleet?*",
                 TextColor = AppGlobalVariables.Black,
                 VerticalTextAlignment = TextAlignment.Center,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(CustomEntry)),
@@ -654,13 +687,13 @@ namespace FMS
 
             var frameFleetBNameEdior = new CustomEditor
             {
-                Placeholder = " ENTER BUSINESS NAME",
+                Placeholder = " [ENTER BUSINESS NAME]",
                 HeightRequest = Device.OnPlatform(height * 7, height * 10, height * 7),
 
             };
             var frameFleetBZipEdior = new CustomEditor
             {
-                Placeholder = " BUSINESS ZIP",
+                Placeholder = " [BUSINESS ZIP]",
                 HeightRequest = Device.OnPlatform(height * 7, height * 10, height * 7)
 
             };
@@ -876,7 +909,7 @@ namespace FMS
             var lblOtherRyder = new Label
             {
                 HorizontalOptions = LayoutOptions.Start,
-                Text = "Do you use Ryder to manage \nfleet ?",
+                Text = "Do you use Ryder to manage \nfleet?*",
                 TextColor = AppGlobalVariables.Black,
                 VerticalTextAlignment = TextAlignment.Center,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(CustomEntry)),
@@ -910,13 +943,13 @@ namespace FMS
             };
             var frameOtherBNameEdior = new CustomEditor
             {
-                Placeholder = " ENTER BUSINESS NAME",
+                Placeholder = " [ENTER BUSINESS NAME]",
                 HeightRequest = Device.OnPlatform(height * 7, height * 10, height * 7),
 
             };
             var frameOtherBZipEdior = new CustomEditor
             {
-                Placeholder = " BUSINESS ZIP",
+                Placeholder = " [BUSINESS ZIP]",
                 HeightRequest = Device.OnPlatform(height * 7, height * 10, height * 7)
 
             };
@@ -1195,7 +1228,7 @@ namespace FMS
             {
                 if (frameEdior.Text == null || frameEdior.Text == "" || frameEdior.Text == " [ENTER SAP NUMBER]")
                 {
-                    await DisplayAlert("Error", "Please enter sap number.", "Cancel");
+                    await DisplayAlert("Error", "Please enter SAP number.", "Cancel");
                 }
                 else
                 {
@@ -1226,22 +1259,86 @@ namespace FMS
                                     Source = ImageSource.FromFile("imgEdit.png"),
                                     HorizontalOptions = LayoutOptions.EndAndExpand
                                 };
-                                TapGestureRecognizer gestures = new TapGestureRecognizer();
-                                gestures.Tapped += (sender, e) =>
-                                 {
-                                     DisplayAlert("Alert", lblAcntNo.Text, "OK");
-                                 };
-                                imgAcntEdit.GestureRecognizers.Add(gestures);
+
                                 var stackAcc = new StackLayout
                                 {
                                     Orientation = StackOrientation.Horizontal,
                                     Children = { lblAcntNo, imgAcntEdit }
                                 };
-                                stackRentChildren.Children.Add(stackAcc); stackAcnt.IsVisible = true;
+
+
+
+                                var entryEditRent = new CustomEntry
+                                {
+                                    HeightRequest = Device.OnPlatform(height * 7, height * 10, height * 7),
+                                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                                };
+                                var imgRentTick = new Image
+                                {
+                                    Source = "tick.png"
+                                };
+                                var imgRentClose = new Image
+                                {
+                                    Source = "imgClose.png"
+                                };
+                                var stackEditRent = new StackLayout
+                                {
+                                    Orientation = StackOrientation.Horizontal,
+                                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                                    IsVisible = false,
+                                    Children =
+                                     {
+                                        entryEditRent,imgTick,imgClose
+                                        }
+                                };
+
+                                stackRentChildren.Children.Add(stackAcc);
+
+                                stackRentChildren.Children.Add(stackEditRent);
+
+                                stackAcnt.IsVisible = true;
                                 stackbtnRentSbumit.IsVisible = false;
                                 stackRentDrive.IsVisible = false;
                                 stackRentAdd.IsVisible = true;
                                 RegisterStepOne.rso.truckData.Add(frameRentEdior.Text.ToString());
+
+                                TapGestureRecognizer gestures = new TapGestureRecognizer();
+                                gestures.Tapped += (sender, e) =>
+                                                                 {
+                                                                     stackEditRent.IsVisible = true;
+                                                                     stackAcc.IsVisible = false;
+                                                                     entryEditRent.Text = lblAcntNo.Text;
+                                                                     //DisplayAlert("Alert", lblAcntNo.Text, "OK");
+                                                                 };
+                                imgAcntEdit.GestureRecognizers.Add(gestures);
+
+                                TapGestureRecognizer gesturesRentTick = new TapGestureRecognizer();
+                                gesturesRentTick.Tapped += (sender, e) =>
+                                                                             {
+                                                                                 DisplayAlert("Alert", "tick", "OK");
+                                                                                 stackEditRent.IsVisible = false;
+                                                                                 stackAcc.IsVisible = true;
+                                                                                 lblAcntNo.Text = entryEditRent.Text;
+                                                                                 //          RegisterStepOne.rso.userP.employeeNumber = lblAcntNo.Text.ToString();
+
+                                                                             };
+                                imgRentTick.GestureRecognizers.Add(gesturesRentTick);
+
+
+                                TapGestureRecognizer gesturesRentClose = new TapGestureRecognizer();
+                                gesturesRentClose.Tapped += (sender, e) =>
+                                                                 {
+                                                                     DisplayAlert("Alert", "close", "OK");
+                                                                     stackEditRent.IsVisible = false;
+                                                                     stackAcc.IsVisible = true;
+                                                                     lblAcntNo.Text = entryEditRent.Text;
+                                                                     // RegisterStepOne.rso.userP.employeeNumber = lblAcntNo.Text.ToString();
+
+                                                                 };
+                                imgRentClose.GestureRecognizers.Add(gesturesRentClose);
+
+
+
 
                             }
                         };
@@ -1250,7 +1347,7 @@ namespace FMS
                        {
                            if (frameFleetEdior.Text == null || frameFleetEdior.Text == "" || frameFleetEdior.Text == " [ENTER LESSEE NUMBER]")
                            {
-                               DisplayAlert("Error", "Please enter lessee number", "Cancel");
+                               DisplayAlert("Error", "Please enter lessee number.", "Cancel");
                            }
                            else
                            {
@@ -1287,7 +1384,7 @@ namespace FMS
                        {
                            if (frameOtherEdior.Text == null || frameOtherEdior.Text == "" || frameOtherEdior.Text == " [ENTER LESSEE NUMBER]")
                            {
-                               DisplayAlert("Error", "Please lessee  number", "Cancel");
+                               DisplayAlert("Error", "Please enter lessee number.", "Cancel");
                            }
                            else
                            {
@@ -1347,21 +1444,59 @@ namespace FMS
 
             var lblOtherAddMoreTap = new TapGestureRecognizer();
             lblOtherAddMoreTap.Tapped += (s, e) =>
-            {
-                btnOtherSubmit.IsVisible = true;
-                frameOtherEdior.IsVisible = true;
-                stackbtnOtherSbumit.IsVisible = true;
-                frameOtherEdior.Text = string.Empty;
-                stackOtherAdd.IsVisible = false;
-            };
+                                                    {
+                                                        btnOtherSubmit.IsVisible = true;
+                                                        frameOtherEdior.IsVisible = true;
+                                                        stackbtnOtherSbumit.IsVisible = true;
+                                                        frameOtherEdior.Text = string.Empty;
+                                                        stackOtherAdd.IsVisible = false;
+
+                                                    };
             stackOtherAdd.GestureRecognizers.Add(lblOtherAddMoreTap);
 
             var lblBackTap = new TapGestureRecognizer();
             lblBackTap.Tapped += (s, e) =>
-            {
-                Navigation.PopModalAsync();
-            };
+                                                    {
+                                                        Navigation.PopModalAsync();
+
+                                                    };
             lblBackBtn.GestureRecognizers.Add(lblBackTap);
+
+            var stackNextTap = new TapGestureRecognizer();
+            stackNextTap.Tapped += (s, e) =>
+                                        {
+                                            Navigation.PushModalAsync(new RegisterStepThree());
+                                        };
+            stackNext.GestureRecognizers.Add(stackNextTap);
+
+            var imgSapEditTap = new TapGestureRecognizer();
+            imgSapEditTap.Tapped += (s, e) =>
+                            {
+                                stackimgEdit.IsVisible = false;
+                                stackEditSapNo.IsVisible = true;
+                                entryEditSapNo.Text = lblsapNo.Text;
+                            };
+            imgSapEdit.GestureRecognizers.Add(imgSapEditTap);
+
+            var imgTickTap = new TapGestureRecognizer();
+            imgTickTap.Tapped += (s, e) =>
+                                        {
+                                            stackimgEdit.IsVisible = true;
+                                            stackEditSapNo.IsVisible = false;
+                                            lblsapNo.Text = entryEditSapNo.Text;
+                                            //RegisterStepOne.rso.userP.employeeNumber = lblsapNo.Text.ToString();
+                                        };
+            imgTick.GestureRecognizers.Add(imgTickTap);
+
+            var imgCloseTap = new TapGestureRecognizer();
+            imgCloseTap.Tapped += (s, e) =>
+                                                                {
+                                                                    stackimgEdit.IsVisible = true;
+                                                                    stackEditSapNo.IsVisible = false;
+                                                                    //  RegisterStepOne.rso.userP.employeeNumber = lblsapNo.Text.ToString();
+                                                                };
+            imgClose.GestureRecognizers.Add(imgCloseTap);
+
 
             #region for dynamic data loading
             if (!string.IsNullOrEmpty(RegisterStepOne.rso.userP.employeeNumber))
@@ -1421,9 +1556,9 @@ namespace FMS
                     };
                     TapGestureRecognizer gestures = new TapGestureRecognizer();
                     gestures.Tapped += (sender, e) =>
-                    {
-                        DisplayAlert("Alert", lblAcntNo.Text, "OK");
-                    };
+                                                     {
+                                                         DisplayAlert("Alert", lblAcntNo.Text, "OK");
+                                                     };
                     imgAcntEdit.GestureRecognizers.Add(gestures);
                     var stackAcc = new StackLayout
                     {
@@ -1455,9 +1590,9 @@ namespace FMS
                     };
                     TapGestureRecognizer gestures = new TapGestureRecognizer();
                     gestures.Tapped += (sender, e) =>
-                    {
-                        DisplayAlert("Alert", lblAcntNo.Text, "OK");
-                    };
+                                                                                    {
+                                                                                        DisplayAlert("Alert", lblAcntNo.Text, "OK");
+                                                                                    };
                     imgAcntEdit.GestureRecognizers.Add(gestures);
                     var stackAcc = new StackLayout
                     {

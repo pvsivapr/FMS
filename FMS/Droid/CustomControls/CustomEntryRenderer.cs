@@ -70,6 +70,23 @@ namespace FMS.Android
                     else
                     {
                     }
+
+                    if (element.IsPhoneNumber == true)
+                    {
+                        Control.SetRawInputType(global::Android.Text.InputTypes.ClassPhone);
+                    }
+                    else if (element.IsNumeric == true)
+                    {
+                        Control.SetRawInputType(global::Android.Text.InputTypes.ClassNumber);
+                    }
+                    else if (element.IsEmail == true)
+                    {
+                        Control.SetRawInputType(global::Android.Text.InputTypes.TextVariationEmailAddress);
+                    }
+                    else
+                    {
+
+                    }
                 }
             }
             catch (Exception ex)
@@ -128,6 +145,23 @@ namespace FMS.Android
                     }
                     else
                     {
+                    }
+
+                    if (element.IsPhoneNumber == true)
+                    {
+                        Control.SetRawInputType(global::Android.Text.InputTypes.ClassPhone);
+                    }
+                    else if (element.IsNumeric == true)
+                    {
+                        Control.SetRawInputType(global::Android.Text.InputTypes.ClassNumber);
+                    }
+                    else if (element.IsEmail == true)
+                    {
+                        Control.SetRawInputType(global::Android.Text.InputTypes.TextVariationEmailAddress);
+                    }
+                    else
+                    {
+
                     }
                 }
             }

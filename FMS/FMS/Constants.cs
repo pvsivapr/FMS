@@ -11,6 +11,7 @@ namespace FMS
         public const string ApiKey = "";
         public const string Apiurl = "https://st.idm.ryder.com/";
         public const string Apiurl_Extended = "iam/im/pub/rws/users/";
+        public static string Apiurl_Extended_userId = "";
         public const string MasterKey = "";
 
 
