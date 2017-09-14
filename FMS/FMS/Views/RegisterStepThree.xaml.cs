@@ -25,14 +25,14 @@ namespace FMS
             var styleEntryInput = new Style(typeof(CustomEntry))
             {
                 Setters = {
-                    new Setter { Property = CustomEntry.PlaceholderColorProperty, Value = AppGlobalVariables.Black  },
-                    new Setter { Property = CustomEntry.TextColorProperty, Value = AppGlobalVariables.Black  },
-                    new Setter { Property = CustomEntry.IsPasswordProperty, Value = true  },
-                    new Setter { Property = CustomEntry.BackgroundColorProperty, Value = Color.White  },
-                    new Setter { Property = CustomEntry.HeightRequestProperty, Value = height * 8  },
-                    new Setter { Property = CustomEntry.HorizontalOptionsProperty, Value = LayoutOptions.FillAndExpand  },
-                    new Setter { Property = CustomEntry.VerticalOptionsProperty, Value = LayoutOptions.Start  }
-                }
+    new Setter { Property = CustomEntry.PlaceholderColorProperty, Value = AppGlobalVariables.Black  },
+    new Setter { Property = CustomEntry.TextColorProperty, Value = AppGlobalVariables.Black  },
+    new Setter { Property = CustomEntry.IsPasswordProperty, Value = true  },
+    new Setter { Property = CustomEntry.BackgroundColorProperty, Value = Color.White  },
+    new Setter { Property = CustomEntry.HeightRequestProperty, Value = height * 8  },
+    new Setter { Property = CustomEntry.HorizontalOptionsProperty, Value = LayoutOptions.FillAndExpand  },
+    new Setter { Property = CustomEntry.VerticalOptionsProperty, Value = LayoutOptions.Start  }
+    }
             };
             Resources.Add("styleEntryInput", styleEntryInput);
             #endregion
@@ -48,7 +48,7 @@ namespace FMS
                 EndIndex = 5,
                 ShallUnderLine = true,
                 HeightRequest = height * 8,
-                Margin = new Thickness(0, Device.OnPlatform(height * 0, height * 1.5, height * 2.5), 0, 0),
+                //Margin = new Thickness(0, Device.OnPlatform(height * 0, height * 1.5, height * 2.5), 0, 0),
                 FontSize = Device.OnPlatform(height * 2.3, height * 2.5, height * 2.5),
                 TextColor = AppGlobalVariables.Black,
                 //BackgroundColor = Color.Yellow,
@@ -91,18 +91,18 @@ namespace FMS
             Grid gridHeader = new Grid()
             {
                 RowDefinitions =
-                {
-                    new RowDefinition{ Height = new GridLength(1, GridUnitType.Star)},
-                    new RowDefinition{ Height = new GridLength(0.8, GridUnitType.Star)}
-                },
+    {
+    new RowDefinition{ Height = new GridLength(1, GridUnitType.Star)},
+    new RowDefinition{ Height = new GridLength(0.8, GridUnitType.Star)}
+    },
                 ColumnDefinitions =
-                {
-                    new ColumnDefinition{ Width=new GridLength(0.2, GridUnitType.Star)},
-                    new ColumnDefinition{ Width=new GridLength(1, GridUnitType.Star)},
-                    new ColumnDefinition{ Width=new GridLength(5, GridUnitType.Star)},
-                    new ColumnDefinition{ Width=new GridLength(1, GridUnitType.Star)},
-                    new ColumnDefinition{ Width=new GridLength(0.5, GridUnitType.Star)}
-                },
+    {
+    new ColumnDefinition{ Width=new GridLength(0.2, GridUnitType.Star)},
+    new ColumnDefinition{ Width=new GridLength(1, GridUnitType.Star)},
+    new ColumnDefinition{ Width=new GridLength(5, GridUnitType.Star)},
+    new ColumnDefinition{ Width=new GridLength(1, GridUnitType.Star)},
+    new ColumnDefinition{ Width=new GridLength(0.5, GridUnitType.Star)}
+    },
                 RowSpacing = 0,
                 Padding = new Thickness(0, 0, 0, 0),
                 HeightRequest = height * 18,
@@ -179,13 +179,13 @@ namespace FMS
             Grid gridBtnNext = new Grid()
             {
                 RowDefinitions =
-                {
-                    new RowDefinition{ Height = GridLength.Auto}
-                },
+    {
+    new RowDefinition{ Height = GridLength.Auto}
+    },
                 ColumnDefinitions =
-                {
-                    new ColumnDefinition{ Width=new GridLength(1, GridUnitType.Star)},
-                },
+    {
+    new ColumnDefinition{ Width=new GridLength(1, GridUnitType.Star)},
+    },
                 RowSpacing = height * 2,
                 WidthRequest = width * 98,
                 Padding = new Thickness(10, 0, 10, 0),
@@ -203,22 +203,22 @@ namespace FMS
             {
                 Padding = new Thickness(0, Device.OnPlatform(20, 0, 0), 0, 10),
                 Children = {
-                    new StackLayout
-                    {
-                        Spacing=0,
-                        Children=
-                        {
-                            gridHeader,
+    new StackLayout
+    {
+    Spacing=0,
+    Children=
+    {
+    gridHeader,
                             //lblPageTitle,
                         }
-                    },
-                    new ScrollView
-                    {
-                        Content=stackScrollBody
-                    },
-                    gridBtnNext
+    },
+    new ScrollView
+    {
+    Content=stackScrollBody
+    },
+    gridBtnNext
 
-                },
+    },
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
             PageControlsStackLayout.Children.Add(stackMain);
@@ -291,7 +291,7 @@ namespace FMS
                         entryUConfirlPassword.BorderColors = AppGlobalVariables.EntryBorderErrorColor;
                         entryUConfirlPassword.Text = entryUConfirlPassword.Text + " ";
                         entryUConfirlPassword.Text = entryUConfirlPassword.Text.Remove(entryUConfirlPassword.Text.Length - 1);
-                        DisplayThisAlert("The last name Cannot be empty");
+                        DisplayThisAlert("Confirm password Cannot be empty");
                     }
                     //else if (!Regex.IsMatch(entryUConfirlPassword.Text, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$"))
                     //{
@@ -300,16 +300,16 @@ namespace FMS
                     //    entryUConfirlPassword.Text = entryUConfirlPassword.Text.Remove(entryUConfirlPassword.Text.Length - 1);
                     //    DisplayThisAlert("The last name Cannot be empty");
                     //}
-                    //else if (!(entryUPassword.Text == entryUConfirlPassword.Text))
-                    //{
-                    //    entryUPassword.BorderColors = AppGlobalVariables.EntryBorderErrorColor;
-                    //    entryUPassword.Text = entryUPassword.Text + " ";
-                    //    entryUPassword.Text = entryUPassword.Text.Remove(entryUPassword.Text.Length - 1);
-                    //    entryUConfirlPassword.BorderColors = AppGlobalVariables.EntryBorderErrorColor;
-                    //    entryUConfirlPassword.Text = entryUConfirlPassword.Text + " ";
-                    //    entryUConfirlPassword.Text = entryUConfirlPassword.Text.Remove(entryUConfirlPassword.Text.Length - 1);
-                    //    DisplayThisAlert("Passwords did not match");
-                    //}
+                    else if (!(entryUPassword.Text == entryUConfirlPassword.Text))
+                    {
+                        entryUPassword.BorderColors = AppGlobalVariables.EntryBorderErrorColor;
+                        entryUPassword.Text = entryUPassword.Text + " ";
+                        entryUPassword.Text = entryUPassword.Text.Remove(entryUPassword.Text.Length - 1);
+                        entryUConfirlPassword.BorderColors = AppGlobalVariables.EntryBorderErrorColor;
+                        entryUConfirlPassword.Text = entryUConfirlPassword.Text + " ";
+                        entryUConfirlPassword.Text = entryUConfirlPassword.Text.Remove(entryUConfirlPassword.Text.Length - 1);
+                        DisplayThisAlert("Passwords did not match");
+                    }
                     else
                     {
                         var response = await validatePassword(entryUPassword.Text);
@@ -319,8 +319,6 @@ namespace FMS
                             RegisterStepOne.rso.userP.confirmPassword = entryUConfirlPassword.Text;
                             RegisterStepOne.rso.userP.forcePasswordReset = "false";
                             UserRegister();
-
-                            //Navigation.PushModalAsync(new RegisterComplete());
                         }
                         else
                         {
@@ -364,7 +362,27 @@ namespace FMS
                 using (IUserRegistrationBAL userRegisterService = new UserRegistrationBAL())
                 {
                     var response = await userRegisterService.UserRegistration(RegisterStepOne.rso.userRR);
-                    //Navigation.PushModalAsync(new RegisterComplete());
+                    if (response != null)
+                    {
+                        if (response.statusCode[0] == "201" || response.status == "OK")
+                        {
+                            await DisplayThisChoice(response.statusDescription);
+                            Navigation.PushModalAsync(new RegisterComplete());
+                        }
+                        else
+                        {
+                            string strMessage = response.statusDescription;
+                            foreach (var msgs in response.messages)
+                            {
+                                strMessage += msgs;
+                            }
+                            DisplayThisAlert(strMessage);
+                        }
+                    }
+                    else
+                    {
+
+                    }
                 }
             }
             catch (Exception ex)
@@ -383,7 +401,9 @@ namespace FMS
             fsError.Spans.Clear();
             try
             {
-                bool hasCapiAlpha = false, hasSmallAlpha = false, hasNumeric = false, hasSpecialChar = false, hasEnoughLength = false;
+                int intPassStrength = 0;
+                string strPassStrength = "";
+                bool hasCapiAlpha = false, hasSmallAlpha = false, hasNumeric = false, hasSpecialChar = false, hasEnoughLength = false, isrepitative = false;
                 var charArrPass = strPass.ToCharArray();
                 if (strPass.Length >= 6 && strPass.Length <= 15)
                 {
@@ -392,6 +412,7 @@ namespace FMS
                     {
                         if (Regex.IsMatch(str.ToString(), @"^([a-z])$"))
                         {
+
                             hasSmallAlpha = true;
                         }
                         else if (Regex.IsMatch(str.ToString(), @"^([A-Z])$"))
@@ -406,26 +427,58 @@ namespace FMS
                         {
                             hasSpecialChar = true;
                         }
+                        if (Regex.IsMatch(str.ToString(), @"^(?!.*([A-Za-z0-9])\1{2})$"))
+                        {
+                            isrepitative = true;
+                        }
                         else
                         {
 
                         }
-
+                    }
+                    intPassStrength += 3;
+                    if (hasSmallAlpha == true && hasCapiAlpha == true && hasSpecialChar == true)
+                    {
+                        intPassStrength += 5;
+                    }
+                    if (hasSpecialChar == true)
+                    {
+                        intPassStrength += 2;
                     }
                 }
                 else
                 {
                     hasEnoughLength = false;
                 }
+
+                if (intPassStrength < 5)
+                {
+                    strPassStrength = "\"Too Weak. \"";
+                }
+                else if (intPassStrength < 8)
+                {
+                    strPassStrength = "\"Weak. \"";
+                }
+                else if (intPassStrength < 10)
+                {
+                    strPassStrength = "\"Acceptable.However. \"";
+                }
+                else
+                {
+                    strPassStrength = "\"Good. \"";
+                }
+
                 if (hasEnoughLength == false)
                 {
                     isValid = false;
+                    fsError.Spans.Add(new Span { Text = strPassStrength, ForegroundColor = Color.Black });
                     fsError.Spans.Add(new Span { Text = "Text length should be from 6 - 15 characters", ForegroundColor = Color.Black });
                     DisplayCustomAlert("Alert", fsError);
                 }
                 else if (hasSmallAlpha == false)
                 {
                     isValid = false;
+                    fsError.Spans.Add(new Span { Text = strPassStrength, ForegroundColor = Color.Black });
                     fsError.Spans.Add(new Span { Text = "Must contain ", ForegroundColor = Color.Black });
                     fsError.Spans.Add(new Span() { Text = "lowercase", ForegroundColor = AppGlobalVariables.orange });
                     fsError.Spans.Add(new Span { Text = "/uppercase, numbers and possibly special characters", ForegroundColor = Color.Black });
@@ -434,6 +487,7 @@ namespace FMS
                 else if (hasCapiAlpha == false)
                 {
                     isValid = false;
+                    fsError.Spans.Add(new Span { Text = strPassStrength, ForegroundColor = Color.Black });
                     fsError.Spans.Add(new Span { Text = "Must contain lowercase/", ForegroundColor = Color.Black });
                     fsError.Spans.Add(new Span() { Text = "uppercase", ForegroundColor = AppGlobalVariables.orange });
                     fsError.Spans.Add(new Span { Text = ", numbers and possibly special characters", ForegroundColor = Color.Black });
@@ -442,6 +496,7 @@ namespace FMS
                 else if (hasNumeric == false)
                 {
                     isValid = false;
+                    fsError.Spans.Add(new Span { Text = strPassStrength, ForegroundColor = Color.Black });
                     fsError.Spans.Add(new Span { Text = "Must contain lowercase/uppercase, ", ForegroundColor = Color.Black });
                     fsError.Spans.Add(new Span() { Text = "numbers", ForegroundColor = AppGlobalVariables.orange });
                     fsError.Spans.Add(new Span { Text = " and possibly special characters", ForegroundColor = Color.Black });
@@ -450,8 +505,16 @@ namespace FMS
                 else if (hasSpecialChar == false)
                 {
                     isValid = false;
+                    fsError.Spans.Add(new Span { Text = strPassStrength, ForegroundColor = Color.Black });
                     fsError.Spans.Add(new Span { Text = "Must contain lowercase/uppercase, numbers and possibly ", ForegroundColor = Color.Black });
                     fsError.Spans.Add(new Span() { Text = "special characters", ForegroundColor = AppGlobalVariables.orange });
+                    DisplayCustomAlert("Alert", fsError);
+                }
+                else if (isrepitative == true)
+                {
+                    isValid = false;
+                    fsError.Spans.Add(new Span { Text = strPassStrength, ForegroundColor = Color.Black });
+                    fsError.Spans.Add(new Span { Text = "No character must repeat more than 2 times", ForegroundColor = Color.Black });
                     DisplayCustomAlert("Alert", fsError);
                 }
                 else
