@@ -34,7 +34,7 @@ namespace FMS
                 HeightRequest = height * 8,
                 Margin = new Thickness(0, Device.OnPlatform(height * 0, height * 1.5, height * 2.5), 0, 0),
                 FontSize = Device.OnPlatform(height * 2.3, height * 2.5, height * 2.5),
-                TextColor = AppGlobalVariables.Black,
+                TextColor = AppGlobalVariables.black,
                 HorizontalTextAlignment = TextAlignment.Start,
                 VerticalTextAlignment = TextAlignment.Start,
                 HorizontalOptions = LayoutOptions.StartAndExpand,
@@ -55,7 +55,7 @@ lblBackBtn
                 //BackgroundColor = Color.Green,
                 FontAttributes = FontAttributes.Bold,
                 FontSize = Device.OnPlatform(height * 3, height * 3, height * 3),
-                TextColor = AppGlobalVariables.Black,
+                TextColor = AppGlobalVariables.black,
                 HorizontalTextAlignment = TextAlignment.Center,
                 VerticalTextAlignment = TextAlignment.Center,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
@@ -121,14 +121,14 @@ lblBackBtn
             {
                 HorizontalOptions = LayoutOptions.Start,
                 Text = "Do you drive for Ryder?*",
-                TextColor = AppGlobalVariables.Black,
+                TextColor = AppGlobalVariables.black,
                 VerticalTextAlignment = TextAlignment.Center,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(CustomEntry)),
             };
             var lblYes = new Label
             {
                 Text = "Yes",
-                TextColor = AppGlobalVariables.Black,
+                TextColor = AppGlobalVariables.black,
                 VerticalTextAlignment = TextAlignment.Center,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(CustomEntry)),
             };
@@ -153,7 +153,7 @@ lblBackBtn
             var lblNo = new Label
             {
                 Text = "No",
-                TextColor = AppGlobalVariables.Black,
+                TextColor = AppGlobalVariables.black,
                 VerticalTextAlignment = TextAlignment.Center,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(CustomEntry)),
             };
@@ -348,7 +348,7 @@ lblBackBtn
             var lblRentYes = new Label
             {
                 Text = "Yes",
-                TextColor = AppGlobalVariables.Black,
+                TextColor = AppGlobalVariables.black,
                 VerticalTextAlignment = TextAlignment.Center,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(CustomEntry)),
                 //CustomFontFamily = AppGlobalVariables.fontFamily45
@@ -374,7 +374,7 @@ lblBackBtn
             var lblRentNo = new Label
             {
                 Text = "No",
-                TextColor = AppGlobalVariables.Black,
+                TextColor = AppGlobalVariables.black,
                 VerticalTextAlignment = TextAlignment.Center,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(CustomEntry)),
                 //CustomFontFamily = AppGlobalVariables.fontFamily45
@@ -409,7 +409,7 @@ lblBackBtn
             {
                 HorizontalOptions = LayoutOptions.Start,
                 Text = "Do you rent from Ryder?*",
-                TextColor = AppGlobalVariables.Black,
+                TextColor = AppGlobalVariables.black,
                 VerticalTextAlignment = TextAlignment.Center,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(CustomEntry)),
             };
@@ -588,7 +588,7 @@ lblBackBtn
             var lblFleetYes = new Label
             {
                 Text = "Yes",
-                TextColor = AppGlobalVariables.Black,
+                TextColor = AppGlobalVariables.black,
                 VerticalTextAlignment = TextAlignment.Center,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(CustomEntry)),
                 //CustomFontFamily = AppGlobalVariables.fontFamily45
@@ -614,7 +614,7 @@ lblBackBtn
             var lblFleetNo = new Label
             {
                 Text = "No",
-                TextColor = AppGlobalVariables.Black,
+                TextColor = AppGlobalVariables.black,
                 VerticalTextAlignment = TextAlignment.Center,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(CustomEntry)),
                 //CustomFontFamily = AppGlobalVariables.fontFamily45
@@ -649,7 +649,7 @@ lblBackBtn
             {
                 HorizontalOptions = LayoutOptions.Start,
                 Text = "Do you use Ryder to manage \nfleet?*",
-                TextColor = AppGlobalVariables.Black,
+                TextColor = AppGlobalVariables.black,
                 VerticalTextAlignment = TextAlignment.Center,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(CustomEntry)),
             };
@@ -851,7 +851,7 @@ lblBackBtn
             var lblOtherYes = new Label
             {
                 Text = "Yes",
-                TextColor = AppGlobalVariables.Black,
+                TextColor = AppGlobalVariables.black,
                 VerticalTextAlignment = TextAlignment.Center,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(CustomEntry)),
                 //CustomFontFamily = AppGlobalVariables.fontFamily45
@@ -877,7 +877,7 @@ lblBackBtn
             var lblOtherNo = new Label
             {
                 Text = "No",
-                TextColor = AppGlobalVariables.Black,
+                TextColor = AppGlobalVariables.black,
                 VerticalTextAlignment = TextAlignment.Center,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(CustomEntry)),
                 //CustomFontFamily = AppGlobalVariables.fontFamily45
@@ -912,7 +912,7 @@ lblBackBtn
             {
                 HorizontalOptions = LayoutOptions.Start,
                 Text = "Do you use Ryder to manage \nfleet?*",
-                TextColor = AppGlobalVariables.Black,
+                TextColor = AppGlobalVariables.black,
                 VerticalTextAlignment = TextAlignment.Center,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(CustomEntry)),
             };
@@ -1150,7 +1150,7 @@ lblBackBtn
             {
                 Text = "next",
                 FontSize = height * 2.5,
-                TextColor = AppGlobalVariables.White,
+                TextColor = AppGlobalVariables.white,
                 HeightRequest = height * 7,
                 HorizontalTextAlignment = TextAlignment.Center,
                 VerticalTextAlignment = TextAlignment.Center,
@@ -1160,7 +1160,7 @@ lblBackBtn
             var stackNext = new StackLayout
             {
                 Children = { lblNext },
-                BackgroundColor = AppGlobalVariables.Gray,
+                BackgroundColor = AppGlobalVariables.gray,
                 HeightRequest = height * 7,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.Center

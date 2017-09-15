@@ -18,10 +18,10 @@ namespace FMS
         static HttpClientSource()
         {
             client = new HttpClient();
-            client.BaseAddress = new Uri(Constants.Apiurl);
+            client.BaseAddress = new Uri(Constants.apiurl);
             client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Add("X-Parse-Application-Id", Constants.ApplicationID);
-            client.DefaultRequestHeaders.Add("X-Parse-REST-API-Key", Constants.ApiKey);
+            client.DefaultRequestHeaders.Add("X-Parse-Application-Id", Constants.applicationID);
+            client.DefaultRequestHeaders.Add("X-Parse-REST-API-Key", Constants.apiKey);
             //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(new UTF8Encoding().GetBytes(Constants.Username + ":" + Constants.Password)));
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 

@@ -25,14 +25,14 @@ namespace FMS
             var styleEntryInput = new Style(typeof(CustomEntry))
             {
                 Setters = {
-    new Setter { Property = CustomEntry.PlaceholderColorProperty, Value = AppGlobalVariables.Black  },
-    new Setter { Property = CustomEntry.TextColorProperty, Value = AppGlobalVariables.Black  },
-    new Setter { Property = CustomEntry.IsPasswordProperty, Value = true  },
-    new Setter { Property = CustomEntry.BackgroundColorProperty, Value = Color.White  },
-    new Setter { Property = CustomEntry.HeightRequestProperty, Value = height * 8  },
-    new Setter { Property = CustomEntry.HorizontalOptionsProperty, Value = LayoutOptions.FillAndExpand  },
-    new Setter { Property = CustomEntry.VerticalOptionsProperty, Value = LayoutOptions.Start  }
-    }
+                    new Setter { Property = CustomEntry.PlaceholderColorProperty, Value = AppGlobalVariables.black  },
+                    new Setter { Property = CustomEntry.TextColorProperty, Value = AppGlobalVariables.black  },
+                    new Setter { Property = CustomEntry.IsPasswordProperty, Value = true  },
+                    new Setter { Property = CustomEntry.BackgroundColorProperty, Value = Color.White  },
+                    new Setter { Property = CustomEntry.HeightRequestProperty, Value = height * 8  },
+                    new Setter { Property = CustomEntry.HorizontalOptionsProperty, Value = LayoutOptions.FillAndExpand  },
+                    new Setter { Property = CustomEntry.VerticalOptionsProperty, Value = LayoutOptions.Start  }
+                }
             };
             Resources.Add("styleEntryInput", styleEntryInput);
             #endregion
@@ -50,8 +50,7 @@ namespace FMS
                 HeightRequest = height * 8,
                 //Margin = new Thickness(0, Device.OnPlatform(height * 0, height * 1.5, height * 2.5), 0, 0),
                 FontSize = Device.OnPlatform(height * 2.3, height * 2.5, height * 2.5),
-                TextColor = AppGlobalVariables.Black,
-                //BackgroundColor = Color.Yellow,
+                TextColor = AppGlobalVariables.black,
                 HorizontalTextAlignment = TextAlignment.Start,
                 VerticalTextAlignment = TextAlignment.Start,
                 HorizontalOptions = LayoutOptions.StartAndExpand,
@@ -70,7 +69,7 @@ namespace FMS
                 FontAttributes = FontAttributes.Bold,
                 //BackgroundColor = Color.Green,
                 FontSize = Device.OnPlatform(height * 3, height * 3, height * 3),
-                TextColor = AppGlobalVariables.Black,
+                TextColor = AppGlobalVariables.black,
                 HorizontalTextAlignment = TextAlignment.Center,
                 VerticalTextAlignment = TextAlignment.Center,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
@@ -80,7 +79,7 @@ namespace FMS
             var lblPageTitle = new Label
             {
                 Text = "Create a password",
-                TextColor = AppGlobalVariables.Black,
+                TextColor = AppGlobalVariables.black,
                 //BackgroundColor = Color.Maroon,
                 FontAttributes = FontAttributes.Bold,
                 VerticalTextAlignment = TextAlignment.Start,
@@ -91,18 +90,18 @@ namespace FMS
             Grid gridHeader = new Grid()
             {
                 RowDefinitions =
-    {
-    new RowDefinition{ Height = new GridLength(1, GridUnitType.Star)},
-    new RowDefinition{ Height = new GridLength(0.8, GridUnitType.Star)}
-    },
+                {
+                    new RowDefinition{ Height = new GridLength(1, GridUnitType.Star)},
+                    new RowDefinition{ Height = new GridLength(0.8, GridUnitType.Star)}
+                },
                 ColumnDefinitions =
-    {
-    new ColumnDefinition{ Width=new GridLength(0.2, GridUnitType.Star)},
-    new ColumnDefinition{ Width=new GridLength(1, GridUnitType.Star)},
-    new ColumnDefinition{ Width=new GridLength(5, GridUnitType.Star)},
-    new ColumnDefinition{ Width=new GridLength(1, GridUnitType.Star)},
-    new ColumnDefinition{ Width=new GridLength(0.5, GridUnitType.Star)}
-    },
+                {
+                    new ColumnDefinition{ Width=new GridLength(0.2, GridUnitType.Star)},
+                    new ColumnDefinition{ Width=new GridLength(1, GridUnitType.Star)},
+                    new ColumnDefinition{ Width=new GridLength(5, GridUnitType.Star)},
+                    new ColumnDefinition{ Width=new GridLength(1, GridUnitType.Star)},
+                    new ColumnDefinition{ Width=new GridLength(0.5, GridUnitType.Star)}
+                },
                 RowSpacing = 0,
                 Padding = new Thickness(0, 0, 0, 0),
                 HeightRequest = height * 18,
@@ -119,7 +118,7 @@ namespace FMS
             var lblPageInfo = new Label
             {
                 Text = "Your password must be lorem ipsum\ndolor siat amet",
-                TextColor = AppGlobalVariables.Black,
+                TextColor = AppGlobalVariables.black,
                 FontSize = Device.OnPlatform(height * 2.5, height * 2.8, height * 2.8),
                 HorizontalTextAlignment = TextAlignment.Center,
                 VerticalTextAlignment = TextAlignment.Center,
@@ -131,14 +130,14 @@ namespace FMS
             {
                 Placeholder = "[PASSWORD]*",
                 IsCustomPassword = true,
-                BorderColors = AppGlobalVariables.EntryBorderColor,
+                BorderColors = AppGlobalVariables.entryBorderColor,
                 Style = (Style)Resources["styleEntryInput"]
             };
             CustomEntry entryUConfirlPassword = new CustomEntry()
             {
                 Placeholder = "[CONFIRM PASSWORD]*",
                 IsCustomPassword = true,
-                BorderColors = AppGlobalVariables.EntryBorderColor,
+                BorderColors = AppGlobalVariables.entryBorderColor,
                 Style = (Style)Resources["styleEntryInput"]
             };
 
@@ -154,7 +153,7 @@ namespace FMS
             {
                 Text = "next",
                 FontSize = height * 2.5,
-                TextColor = AppGlobalVariables.White,
+                TextColor = AppGlobalVariables.white,
                 HeightRequest = height * 7,
                 HorizontalTextAlignment = TextAlignment.Center,
                 VerticalTextAlignment = TextAlignment.Center,
@@ -163,14 +162,14 @@ namespace FMS
             };
             BoxView boxNext = new BoxView()
             {
-                Color = AppGlobalVariables.Gray,
+                Color = AppGlobalVariables.gray,
                 HeightRequest = height * 7,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.Center
             };
             BoxView boxNextGesture = new BoxView()
             {
-                Color = AppGlobalVariables.Transparent,
+                Color = AppGlobalVariables.transparent,
                 HeightRequest = height * 7,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.Center
@@ -179,13 +178,13 @@ namespace FMS
             Grid gridBtnNext = new Grid()
             {
                 RowDefinitions =
-    {
-    new RowDefinition{ Height = GridLength.Auto}
-    },
+                {
+                    new RowDefinition{ Height = GridLength.Auto}
+                },
                 ColumnDefinitions =
-    {
-    new ColumnDefinition{ Width=new GridLength(1, GridUnitType.Star)},
-    },
+                {
+                    new ColumnDefinition{ Width=new GridLength(1, GridUnitType.Star)},
+                },
                 RowSpacing = height * 2,
                 WidthRequest = width * 98,
                 Padding = new Thickness(10, 0, 10, 0),
@@ -203,29 +202,29 @@ namespace FMS
             {
                 Padding = new Thickness(0, Device.OnPlatform(20, 0, 0), 0, 10),
                 Children = {
-    new StackLayout
-    {
-    Spacing=0,
-    Children=
-    {
-    gridHeader,
+                    new StackLayout
+                    {
+                        Spacing=0,
+                        Children=
+                        {
+                            gridHeader,
                             //lblPageTitle,
                         }
-    },
-    new ScrollView
-    {
-    Content=stackScrollBody
-    },
-    gridBtnNext
+                    },
+                    new ScrollView
+                    {
+                        Content=stackScrollBody
+                    },
+                    gridBtnNext
 
-    },
+                },
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
-            PageControlsStackLayout.Children.Add(stackMain);
+            pageControlsStackLayout.Children.Add(stackMain);
             #endregion
 
             #region for data filling
-
+            /*
             if (!string.IsNullOrEmpty(RegisterStepOne.rso.userP.password))
             {
                 entryUPassword.Text = RegisterStepOne.rso.userP.password;
@@ -234,7 +233,7 @@ namespace FMS
             {
                 entryUConfirlPassword.Text = RegisterStepOne.rso.userP.confirmPassword;
             }
-
+            */
             #endregion
 
             #region for validations and events
@@ -243,20 +242,20 @@ namespace FMS
             #region for text changes in entries
             entryUPassword.TextChanged += (object sender, TextChangedEventArgs e) =>
             {
-                RegisterStepOne.rso.userP.password = entryUPassword.Text;
+                //RegisterStepOne.rso.userP.password = entryUPassword.Text;
             };
             entryUConfirlPassword.TextChanged += (object sender, TextChangedEventArgs e) =>
             {
-                RegisterStepOne.rso.userP.confirmPassword = entryUConfirlPassword.Text;
+                //RegisterStepOne.rso.userP.confirmPassword = entryUConfirlPassword.Text;
             };
             #endregion
 
             #region for back button clicked
             TapGestureRecognizer lblBackTap = new TapGestureRecognizer();
             lblBackTap.Tapped += (s, e) =>
-            {
-                Navigation.PopModalAsync();
-            };
+                        {
+                            Navigation.PopModalAsync();
+                        };
             lblBackBtn.GestureRecognizers.Add(lblBackTap);
             #endregion
 
@@ -274,40 +273,43 @@ namespace FMS
                 {
                     if (string.IsNullOrEmpty(entryUPassword.Text))
                     {
-                        entryUPassword.BorderColors = AppGlobalVariables.EntryBorderErrorColor;
+                        entryUPassword.BorderColors = AppGlobalVariables.entryBorderErrorColor;
                         entryUPassword.Text = entryUPassword.Text + " ";
                         entryUPassword.Text = entryUPassword.Text.Remove(entryUPassword.Text.Length - 1);
+
                         DisplayThisAlert("Password Cannot be empty");
                     }
                     //else if (!Regex.IsMatch(entryUPassword.Text, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$"))
                     //{
-                    //    entryUPassword.BorderColors = AppGlobalVariables.EntryBorderErrorColor;
+                    //    entryUPassword.BorderColors = AppGlobalVariables.entryBorderErrorColor;
                     //    entryUPassword.Text = entryUPassword.Text + " ";
                     //    entryUPassword.Text = entryUPassword.Text.Remove(entryUPassword.Text.Length - 1);
                     //    DisplayThisAlert("“Must contain lowercase/uppercase, numbers and possibly special characters");
                     //}
                     else if (string.IsNullOrEmpty(entryUConfirlPassword.Text))
                     {
-                        entryUConfirlPassword.BorderColors = AppGlobalVariables.EntryBorderErrorColor;
+                        entryUConfirlPassword.BorderColors = AppGlobalVariables.entryBorderErrorColor;
                         entryUConfirlPassword.Text = entryUConfirlPassword.Text + " ";
                         entryUConfirlPassword.Text = entryUConfirlPassword.Text.Remove(entryUConfirlPassword.Text.Length - 1);
+
                         DisplayThisAlert("Confirm password Cannot be empty");
                     }
                     //else if (!Regex.IsMatch(entryUConfirlPassword.Text, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$"))
                     //{
-                    //    entryUConfirlPassword.BorderColors = AppGlobalVariables.EntryBorderErrorColor;
+                    //    entryUConfirlPassword.BorderColors = AppGlobalVariables.entryBorderErrorColor;
                     //    entryUConfirlPassword.Text = entryUConfirlPassword.Text + " ";
                     //    entryUConfirlPassword.Text = entryUConfirlPassword.Text.Remove(entryUConfirlPassword.Text.Length - 1);
                     //    DisplayThisAlert("The last name Cannot be empty");
                     //}
                     else if (!(entryUPassword.Text == entryUConfirlPassword.Text))
                     {
-                        entryUPassword.BorderColors = AppGlobalVariables.EntryBorderErrorColor;
+                        entryUPassword.BorderColors = AppGlobalVariables.entryBorderErrorColor;
                         entryUPassword.Text = entryUPassword.Text + " ";
                         entryUPassword.Text = entryUPassword.Text.Remove(entryUPassword.Text.Length - 1);
-                        entryUConfirlPassword.BorderColors = AppGlobalVariables.EntryBorderErrorColor;
+                        entryUConfirlPassword.BorderColors = AppGlobalVariables.entryBorderErrorColor;
                         entryUConfirlPassword.Text = entryUConfirlPassword.Text + " ";
                         entryUConfirlPassword.Text = entryUConfirlPassword.Text.Remove(entryUConfirlPassword.Text.Length - 1);
+
                         DisplayThisAlert("Passwords did not match");
                     }
                     else
@@ -318,6 +320,7 @@ namespace FMS
                             RegisterStepOne.rso.userP.password = entryUPassword.Text;
                             RegisterStepOne.rso.userP.confirmPassword = entryUConfirlPassword.Text;
                             RegisterStepOne.rso.userP.forcePasswordReset = "false";
+
                             UserRegister();
                         }
                         else
@@ -344,7 +347,7 @@ namespace FMS
             try
             {
                 var owner = (CustomEntry)sender;
-                owner.BorderColors = AppGlobalVariables.EntryBorderColor;
+                owner.BorderColors = AppGlobalVariables.entryBorderColor;
             }
             catch (Exception ex)
             {
@@ -356,7 +359,7 @@ namespace FMS
         #region for User registration service
         public async void UserRegister()
         {
-            PageLoading.IsVisible = true;
+            pageLoading.IsVisible = true;
             try
             {
                 using (IUserRegistrationBAL userRegisterService = new UserRegistrationBAL())
@@ -364,7 +367,7 @@ namespace FMS
                     var response = await userRegisterService.UserRegistration(RegisterStepOne.rso.userRR);
                     if (response != null)
                     {
-                        if (response.statusCode[0] == "201" || response.status == "OK")
+                        if (response.statusCode[0] == "201")
                         {
                             await DisplayThisChoice(response.statusDescription);
                             Navigation.PushModalAsync(new RegisterComplete());
@@ -381,15 +384,16 @@ namespace FMS
                     }
                     else
                     {
-
+                        await DisplayThisChoice("Server error");
                     }
                 }
             }
             catch (Exception ex)
             {
                 var msg = ex.Message;
+                await DisplayThisChoice("Server/Network error");
             }
-            PageLoading.IsVisible = false;
+            pageLoading.IsVisible = false;
         }
         #endregion
 

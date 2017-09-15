@@ -7,33 +7,32 @@ namespace FMS
     public static class Constants
     {
         // FMS DEVELOPMENT CREDENTIALS
-        public const string ApplicationID = "";
-        public const string ApiKey = "";
-        public const string Apiurl = "https://st.idm.ryder.com/";
-        public const string Apiurl_Extended = "iam/im/pub/rws/users/";
-        public static string Apiurl_Extended_userId = "";
-        public const string MasterKey = "";
+        public const string applicationID = "";
+        public const string apiKey = "";
+        public const string apiurl = "https://st.idm.ryder.com/";
+        public const string apiurlExtended = "iam/im/pub/rws/users/";
+        public static string apiurlExtendedUserId = "";
+        public const string masterKey = "";
 
 
-        public const string ServerSecretCode = "";
-        public static string ServerSecurityCode;
-        public static bool IsNotified;
-        public static string rem_Ids;
-        //public static IDatabaseMethods dbmethods;
+        public const string serverSecretCode = "";
+        public static string serverSecurityCode;
+        public static bool isNotified;
+        public static string remIds;
 
         //Used in Installation for push notification.
-        public const string AppIdentifier = "com.fleet.ryder";
-        public const string AppName = "RyderFleet";
-        public const string AppVersion = "1";
-        public const string ParseVersion = "1.6.2.0";
-        public const string GCMSenderId = "558839287361";
+        public const string appIdentifier = "com.fleet.ryder";
+        public const string appName = "RyderFleet";
+        public const string appVersion = "1";
+        public const string parseVersion = "1.6.2.0";
+        public const string gcmSenderId = "558839287361";
 
 
         //SportzBee PrivacyPolicy URL.
-        public const string PrivacyPolicyURL = "";
+        public const string privacyPolicyURL = "";
 
         //Error Message to show.
-        public const string ReportErrorMessage = "Sorry for error, please contact us incase this error repeats";
+        public const string reportErrorMessage = "Sorry for error, please contact us incase this error repeats";
 
         //public static Constants()
         //{

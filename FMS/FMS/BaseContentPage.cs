@@ -10,7 +10,7 @@ namespace FMS
     {
         public AbsoluteLayout contentLayout;
         public ActivityIndicator aiLoader;
-        public StackLayout PageLoading, stackDisplayHolder, PageControlsStackLayout;
+        public StackLayout pageLoading, stackAlertHolder, pageControlsStackLayout;
         Label lblErrorTitle, lblErrorMsg;
 
         public static int screenHeight, screenWidth;
@@ -24,7 +24,6 @@ namespace FMS
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
                 VerticalOptions = LayoutOptions.CenterAndExpand,
                 Color = Color.White,
-                //BackgroundColor = Color.FromRgba (0, 0, 0, 0.3),
                 IsEnabled = true,
                 IsVisible = true,
                 IsRunning = true,
@@ -35,37 +34,42 @@ namespace FMS
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.FillAndExpand,
             };
-            PageLoading = new StackLayout
+
+            Label lblLoading = new Label()
+            {
+                Text = "Loading...",
+                FontSize = 15,
+                TextColor = AppGlobalVariables.alertText,
+                HorizontalTextAlignment = TextAlignment.Center,
+                HorizontalOptions = LayoutOptions.CenterAndExpand,
+                VerticalOptions = LayoutOptions.CenterAndExpand
+            };
+            pageLoading = new StackLayout
             {
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 BackgroundColor = Color.FromRgba(0, 0, 0, 0.4),
-                //BackgroundColor = Color.Transparent,
                 IsVisible = false,
-                Children = { aiLoader }
+                Children = { aiLoader, lblLoading }
             };
             lblErrorTitle = new Label()
             {
                 Text = "Alert",
-                FontSize = 15,
+                FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),//13
                 MinimumHeightRequest = (screenHeight * 20) / 100,
                 FontAttributes = FontAttributes.Bold,
-                //BackgroundColor = Color.Maroon,
-                //HorizontalOptions = LayoutOptions.FillAndExpand,
-                //VerticalOptions = LayoutOptions.CenterAndExpand
+                TextColor = AppGlobalVariables.alertText
             };
             lblErrorMsg = new Label()
             {
                 Text = "",
-                FontSize = 13,
+                FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),//15
                 MinimumHeightRequest = (screenHeight * 20) / 100,
-                //HorizontalOptions = LayoutOptions.CenterAndExpand,
-                //VerticalOptions = LayoutOptions.CenterAndExpand
+                TextColor = AppGlobalVariables.alertText
             };
             Button btnAcceptMSG = new Button()
             {
                 Text = "OK",
-                //HeightRequest = (screenHeight * 10) / 100
             };
             btnAcceptMSG.Clicked += CloseMsgDisplay;
 
@@ -79,24 +83,19 @@ namespace FMS
                 },
                 ColumnDefinitions =
                 {
-                    //new ColumnDefinition{ Width=new GridLength(0.2, GridUnitType.Star)},
                     new ColumnDefinition{ Width=new GridLength(1, GridUnitType.Star)},
                     new ColumnDefinition{ Width=new GridLength(1, GridUnitType.Star)},
                     new ColumnDefinition{ Width=new GridLength(1, GridUnitType.Star)},
                     new ColumnDefinition{ Width=new GridLength(1, GridUnitType.Star)},
-                    //new ColumnDefinition{ Width=new GridLength(0.2, GridUnitType.Star)}
                 },
                 RowSpacing = 0,
-                //Padding = new Thickness(0, 0, 0, 0),
-                //BackgroundColor = Color.Green,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
                 VerticalOptions = LayoutOptions.CenterAndExpand
             };
-            //gridErrorMsgHolder.Children.Add(frameBackground, 0, 6, 0, 3);
             gridErrorMsgHolder.Children.Add(lblErrorTitle, 0, 4, 0, 1);
             gridErrorMsgHolder.Children.Add(lblErrorMsg, 0, 4, 1, 2);
 
-            Frame frameBackground = new Frame()
+            Frame frameAlertBackground = new Frame()
             {
                 HasShadow = false,
                 BindingContext = gridErrorMsgHolder,
@@ -107,11 +106,10 @@ namespace FMS
             };
 
 
-            Grid gridHolder = new Grid()
+            Grid gridAlertHolder = new Grid()
             {
                 RowDefinitions =
                 {
-                    //new RowDefinition{ Height = GridLength.Auto}
                     new RowDefinition{ Height = new GridLength(1, GridUnitType.Star)}
                 },
                 ColumnDefinitions =
@@ -119,28 +117,25 @@ namespace FMS
                     new ColumnDefinition{ Width = new GridLength(1, GridUnitType.Star)},
                 },
                 RowSpacing = 0,
-                //BackgroundColor = Color.Yellow,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
                 VerticalOptions = LayoutOptions.CenterAndExpand
             };
-            gridHolder.Children.Add(frameBackground, 0, 0);
-            gridHolder.Children.Add(gridErrorMsgHolder, 0, 0);
+            gridAlertHolder.Children.Add(frameAlertBackground, 0, 0);
+            gridAlertHolder.Children.Add(gridErrorMsgHolder, 0, 0);
 
-            stackDisplayHolder = new StackLayout()
+            stackAlertHolder = new StackLayout()
             {
-                Children = { gridHolder },
-                IsVisible = true,
-                //BackgroundColor = AppGlobalVariables.Transparent,
-                //Padding = new Thickness((screenWidth * 10) / 100, (screenHeight * 10) / 100, (screenWidth * 10) / 100, (screenHeight * 10) / 100)
+                Children = { gridAlertHolder },
+                IsVisible = false,
             };
 
             if (Device.OS == TargetPlatform.iOS)
             {
-                gridHolder.WidthRequest = (screenWidth * 70) / 100;
-                gridHolder.Padding = new Thickness((screenWidth * 5) / 100, 0, (screenWidth * 5) / 100, 0);
-                frameBackground.CornerRadius = 10;
-                frameBackground.BackgroundColor = AppGlobalVariables.iOSAlertBg;
-                frameBackground.WidthRequest = (screenWidth * 70) / 100;
+                gridAlertHolder.WidthRequest = (screenWidth * 70) / 100;
+                gridAlertHolder.Padding = new Thickness((screenWidth * 5) / 100, 0, (screenWidth * 5) / 100, 0);
+                frameAlertBackground.CornerRadius = 10;
+                frameAlertBackground.BackgroundColor = AppGlobalVariables.iOSAlertBg;
+                frameAlertBackground.WidthRequest = (screenWidth * 70) / 100;
                 gridErrorMsgHolder.WidthRequest = (screenWidth * 70) / 100;
                 gridErrorMsgHolder.Padding = new Thickness((screenWidth * 5) / 100, (screenWidth * 5) / 100, (screenWidth * 5) / 100, (screenWidth * 0) / 100);
                 lblErrorTitle.HorizontalTextAlignment = TextAlignment.Center;
@@ -151,9 +146,9 @@ namespace FMS
                 lblErrorMsg.VerticalTextAlignment = TextAlignment.Center;
                 lblErrorMsg.HorizontalOptions = LayoutOptions.FillAndExpand;
                 lblErrorMsg.VerticalOptions = LayoutOptions.CenterAndExpand;
-                stackDisplayHolder.BackgroundColor = Color.FromHex("#25000000");
+                stackAlertHolder.BackgroundColor = Color.FromHex("#25000000");
                 btnAcceptMSG.HeightRequest = (screenHeight * 6) / 100;
-                btnAcceptMSG.BackgroundColor = AppGlobalVariables.Transparent;
+                btnAcceptMSG.BackgroundColor = AppGlobalVariables.transparent;
                 btnAcceptMSG.TextColor = AppGlobalVariables.iOSAlertBtnText;
                 btnAcceptMSG.HorizontalOptions = LayoutOptions.FillAndExpand;
                 btnAcceptMSG.VerticalOptions = LayoutOptions.CenterAndExpand;
@@ -161,11 +156,11 @@ namespace FMS
             }
             else if (Device.OS == TargetPlatform.Android)
             {
-                gridHolder.WidthRequest = (screenWidth * 90) / 100;
-                gridHolder.Padding = new Thickness((screenWidth * 3) / 100, 0, (screenWidth * 3) / 100, 0);
-                frameBackground.CornerRadius = 3;
-                frameBackground.BackgroundColor = AppGlobalVariables.DroidAlertBg;
-                frameBackground.WidthRequest = (screenWidth * 90) / 100;
+                gridAlertHolder.WidthRequest = (screenWidth * 90) / 100;
+                gridAlertHolder.Padding = new Thickness((screenWidth * 3) / 100, 0, (screenWidth * 3) / 100, 0);
+                frameAlertBackground.CornerRadius = 3;
+                frameAlertBackground.BackgroundColor = AppGlobalVariables.droidAlertBg;
+                frameAlertBackground.WidthRequest = (screenWidth * 90) / 100;
                 gridErrorMsgHolder.WidthRequest = (screenWidth * 90) / 100;
                 gridErrorMsgHolder.Padding = new Thickness((screenWidth * 5) / 100, (screenWidth * 5) / 100, (screenWidth * 5) / 100, (screenWidth * 2) / 100);
                 lblErrorTitle.HorizontalTextAlignment = TextAlignment.Start;
@@ -176,10 +171,10 @@ namespace FMS
                 lblErrorMsg.VerticalTextAlignment = TextAlignment.Center;
                 lblErrorMsg.HorizontalOptions = LayoutOptions.StartAndExpand;
                 lblErrorMsg.VerticalOptions = LayoutOptions.CenterAndExpand;
-                stackDisplayHolder.BackgroundColor = Color.FromHex("#30000000");
+                stackAlertHolder.BackgroundColor = Color.FromHex("#30000000");
                 btnAcceptMSG.HeightRequest = (screenHeight * 8) / 100;
-                btnAcceptMSG.BackgroundColor = AppGlobalVariables.DroidAlertBtnBg;
-                btnAcceptMSG.TextColor = AppGlobalVariables.DroidAlertBtnText;
+                btnAcceptMSG.BackgroundColor = AppGlobalVariables.droidAlertBtnBg;
+                btnAcceptMSG.TextColor = AppGlobalVariables.droidAlertBtnText;
                 btnAcceptMSG.HorizontalOptions = LayoutOptions.End;
                 btnAcceptMSG.VerticalOptions = LayoutOptions.Center;
                 gridErrorMsgHolder.Children.Add(btnAcceptMSG, 3, 4, 2, 3);
@@ -187,25 +182,23 @@ namespace FMS
             else
             {
             }
-            //frameBackground.SetBinding(Frame.HeightRequestProperty, new Binding("HeightRequest"));
-            PageControlsStackLayout = new StackLayout
+            pageControlsStackLayout = new StackLayout
             {
                 HorizontalOptions = LayoutOptions.FillAndExpand,
-                //                VerticalOptions = LayoutOptions.FillAndExpand,
                 Padding = new Thickness(0, Device.OnPlatform(20, 0, 0), 0, 0),
                 Spacing = 0
             };
-            AbsoluteLayout.SetLayoutFlags(PageControlsStackLayout, AbsoluteLayoutFlags.All);
-            AbsoluteLayout.SetLayoutBounds(PageControlsStackLayout, new Rectangle(0, 0, 1, 1));
-            contentLayout.Children.Add(PageControlsStackLayout);
+            AbsoluteLayout.SetLayoutFlags(pageControlsStackLayout, AbsoluteLayoutFlags.All);
+            AbsoluteLayout.SetLayoutBounds(pageControlsStackLayout, new Rectangle(0, 0, 1, 1));
+            contentLayout.Children.Add(pageControlsStackLayout);
 
-            AbsoluteLayout.SetLayoutFlags(stackDisplayHolder, AbsoluteLayoutFlags.All);
-            AbsoluteLayout.SetLayoutBounds(stackDisplayHolder, new Rectangle(0.5, 0.5, 1, 1));
-            contentLayout.Children.Add(stackDisplayHolder);
+            AbsoluteLayout.SetLayoutFlags(stackAlertHolder, AbsoluteLayoutFlags.All);
+            AbsoluteLayout.SetLayoutBounds(stackAlertHolder, new Rectangle(0.5, 0.5, 1, 1));
+            contentLayout.Children.Add(stackAlertHolder);
 
-            AbsoluteLayout.SetLayoutFlags(PageLoading, AbsoluteLayoutFlags.All);
-            AbsoluteLayout.SetLayoutBounds(PageLoading, new Rectangle(0.5, 0.5, 1, 1));
-            contentLayout.Children.Add(PageLoading);
+            AbsoluteLayout.SetLayoutFlags(pageLoading, AbsoluteLayoutFlags.All);
+            AbsoluteLayout.SetLayoutBounds(pageLoading, new Rectangle(0.5, 0.5, 1, 1));
+            contentLayout.Children.Add(pageLoading);
             Content = contentLayout;
         }
 
@@ -213,12 +206,12 @@ namespace FMS
         {
             lblErrorTitle.Text = Title;
             lblErrorMsg.FormattedText = message;
-            stackDisplayHolder.IsVisible = true;
+            stackAlertHolder.IsVisible = true;
         }
 
         void CloseMsgDisplay(object sender, EventArgs e)
         {
-            stackDisplayHolder.IsVisible = false;
+            stackAlertHolder.IsVisible = false;
         }
 
         public void DisplayThisAlert(string Title, string message)

@@ -17,6 +17,7 @@ namespace FMS
 
             int height = (BaseContentPage.screenHeight * 1) / 100;
             int width = (BaseContentPage.screenWidth * 1) / 100;
+
             int iconHeight = height * 10;
 
             #region for Body
@@ -68,7 +69,7 @@ namespace FMS
             {
                 Text = "Maintenance",
                 FontSize = height * 2,
-                TextColor = AppGlobalVariables.Black,
+                TextColor = AppGlobalVariables.black,
                 HorizontalTextAlignment = TextAlignment.Center,
                 VerticalTextAlignment = TextAlignment.Start,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
@@ -94,7 +95,7 @@ namespace FMS
             {
                 Text = "Fleet \n Management",
                 FontSize = height * 2,
-                TextColor = AppGlobalVariables.Black,
+                TextColor = AppGlobalVariables.black,
                 HorizontalTextAlignment = TextAlignment.Center,
                 VerticalTextAlignment = TextAlignment.Start,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
@@ -120,7 +121,7 @@ namespace FMS
             {
                 Text = "Fuel Receipts",
                 FontSize = height * 2,
-                TextColor = AppGlobalVariables.Black,
+                TextColor = AppGlobalVariables.black,
                 HorizontalTextAlignment = TextAlignment.Center,
                 VerticalTextAlignment = TextAlignment.Start,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
@@ -136,10 +137,10 @@ namespace FMS
 
             //StackLayout stackOptionsHolder = new StackLayout()
             //{
-            //	Children = { imgMaintenance, imgFleetMgmt, imgFuelRecpt },
-            //	BackgroundColor = Color.Aqua,
-            //	HorizontalOptions = LayoutOptions.FillAndExpand,
-            //	VerticalOptions = LayoutOptions.FillAndExpand
+            //  Children = { imgMaintenance, imgFleetMgmt, imgFuelRecpt },
+            //  BackgroundColor = Color.Aqua,
+            //  HorizontalOptions = LayoutOptions.FillAndExpand,
+            //  VerticalOptions = LayoutOptions.FillAndExpand
             //};
             Grid gridOptionsHolder = new Grid()
             {
@@ -150,14 +151,14 @@ namespace FMS
                     new RowDefinition{ Height=new GridLength(1, GridUnitType.Star)},
                     new RowDefinition{ Height=new GridLength(0.04, GridUnitType.Star)},
                     new RowDefinition{ Height=new GridLength(1, GridUnitType.Star)},
-					//new RowDefinition{ Height=new GridLength(0.5, GridUnitType.Star)}
-					//new RowDefinition{ Height = GridLength.Auto},
-					//new RowDefinition{ Height = GridLength.Auto},
-					//new RowDefinition{ Height = GridLength.Auto},
-					//new RowDefinition{ Height = GridLength.Auto},
-					//new RowDefinition{ Height = GridLength.Auto},
-					//new RowDefinition{ Height = GridLength.Auto}
-				},
+                    //new RowDefinition{ Height=new GridLength(0.5, GridUnitType.Star)}
+                    //new RowDefinition{ Height = GridLength.Auto},
+                    //new RowDefinition{ Height = GridLength.Auto},
+                    //new RowDefinition{ Height = GridLength.Auto},
+                    //new RowDefinition{ Height = GridLength.Auto},
+                    //new RowDefinition{ Height = GridLength.Auto},
+                    //new RowDefinition{ Height = GridLength.Auto}
+                },
                 ColumnDefinitions =
                 {
                     new ColumnDefinition{ Width=new GridLength(1, GridUnitType.Star)}
@@ -193,7 +194,7 @@ namespace FMS
             {
                 Text = " ",
                 FontSize = height * 2,
-                TextColor = AppGlobalVariables.Black,
+                TextColor = AppGlobalVariables.black,
                 HorizontalTextAlignment = TextAlignment.Center,
                 VerticalTextAlignment = TextAlignment.Start,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
@@ -220,7 +221,7 @@ namespace FMS
             {
                 Text = "Services",
                 FontSize = height * 2,
-                TextColor = AppGlobalVariables.Black,
+                TextColor = AppGlobalVariables.black,
                 HorizontalTextAlignment = TextAlignment.Center,
                 VerticalTextAlignment = TextAlignment.Start,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
@@ -247,7 +248,7 @@ namespace FMS
             {
                 Text = "Fuel",
                 FontSize = height * 2,
-                TextColor = AppGlobalVariables.Black,
+                TextColor = AppGlobalVariables.black,
                 HorizontalTextAlignment = TextAlignment.Center,
                 VerticalTextAlignment = TextAlignment.Start,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
@@ -302,7 +303,7 @@ namespace FMS
             {
                 Text = "Rentals",
                 FontSize = height * 2,
-                TextColor = AppGlobalVariables.Black,
+                TextColor = AppGlobalVariables.black,
                 HorizontalTextAlignment = TextAlignment.Center,
                 VerticalTextAlignment = TextAlignment.Start,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
@@ -329,7 +330,7 @@ namespace FMS
             {
                 Text = "Used Trucks",
                 FontSize = height * 2,
-                TextColor = AppGlobalVariables.Black,
+                TextColor = AppGlobalVariables.black,
                 HorizontalTextAlignment = TextAlignment.Center,
                 VerticalTextAlignment = TextAlignment.Start,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
@@ -349,7 +350,7 @@ namespace FMS
             {
                 Placeholder = "Enter Address To Find Location",
                 PlaceholderColor = Color.FromHex("#60000000"),
-                TextColor = AppGlobalVariables.Black,
+                TextColor = AppGlobalVariables.black,
                 WidthRequest = width * 93,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 BackgroundColor = Color.White,
@@ -475,10 +476,10 @@ namespace FMS
                 {
                     new RowDefinition{ Height=new GridLength(1, GridUnitType.Star)},
                     new RowDefinition{ Height=new GridLength(1, GridUnitType.Star)},
-					//new RowDefinition{ Height=new GridLength(1, GridUnitType.Star)},
-					////new RowDefinition{ Height=new GridLength(1, GridUnitType.Star)},
-					//new RowDefinition{ Height=new GridLength(1, GridUnitType.Star)}
-				},
+                    //new RowDefinition{ Height=new GridLength(1, GridUnitType.Star)},
+                    ////new RowDefinition{ Height=new GridLength(1, GridUnitType.Star)},
+                    //new RowDefinition{ Height=new GridLength(1, GridUnitType.Star)}
+                },
                 ColumnDefinitions =
                 {
                     new ColumnDefinition{ Width=new GridLength(1, GridUnitType.Star)},

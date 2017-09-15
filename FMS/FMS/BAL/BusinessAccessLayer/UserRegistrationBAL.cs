@@ -14,34 +14,35 @@ namespace FMS
         public async Task<UserRegistration> UserRegistration(UserRegistrationRequest request)
         {
             UserRegistration userRegistrationResp = new UserRegistration();
-            UserRegistrationFailureResponse URFR;
-            UserRegistrationSuccessResponse URSR;
+            UserRegistrationFailureResponse uRegFailResp;
+            UserRegistrationSuccessResponse uRegSuccessResp;
             //ServerError seMessage;
-            string serviceMethodName = Constants.Apiurl_Extended + Constants.Apiurl_Extended_userId + "/customer";
+            string serviceMethodName = Constants.apiurlExtended + Constants.apiurlExtendedUserId + "/customer";
             try
             {
                 var responseStr = await HttpClientSource<UserRegistrationRequest>.CreateOrUpdateItemWithPostAsync(serviceMethodName, request);
 
-                if (responseStr == null)
+                if (responseStr != null)
                 {
-                    if (true)
+                    string strSuccess = "\"statusCode\":[\"201\"]";
+                    if (responseStr.Contains(strSuccess))
                     {
-                        URSR = JsonConvert.DeserializeObject<UserRegistrationSuccessResponse>(responseStr);
-                        userRegistrationResp.status = URSR.status;
-                        userRegistrationResp.statusCode = URSR.statusCode;
-                        userRegistrationResp.statusDescription = URSR.statusDescription;
-                        userRegistrationResp.transactionId = URSR.transactionId;
+                        uRegSuccessResp = JsonConvert.DeserializeObject<UserRegistrationSuccessResponse>(responseStr);
+                        userRegistrationResp.status = uRegSuccessResp.status;
+                        userRegistrationResp.statusCode = uRegSuccessResp.statusCode;
+                        userRegistrationResp.statusDescription = uRegSuccessResp.statusDescription;
+                        userRegistrationResp.transactionId = uRegSuccessResp.transactionId;
                         userRegistrationResp.messages = null;
-                        userRegistrationResp.version = URSR.version;
+                        userRegistrationResp.version = uRegSuccessResp.version;
                     }
                     else
                     {
-                        URFR = JsonConvert.DeserializeObject<UserRegistrationFailureResponse>(responseStr);
-                        userRegistrationResp.status = URFR.status;
-                        userRegistrationResp.statusCode[0] = URFR.statusCode;
-                        userRegistrationResp.statusDescription = URFR.statusDescription;
+                        uRegFailResp = JsonConvert.DeserializeObject<UserRegistrationFailureResponse>(responseStr);
+                        userRegistrationResp.status = uRegFailResp.status;
+                        //userRegistrationResp.statusCode = URFR.statusCode;
+                        userRegistrationResp.statusDescription = uRegFailResp.statusDescription;
                         userRegistrationResp.transactionId = "";
-                        userRegistrationResp.messages = URFR.messages;
+                        userRegistrationResp.messages = uRegFailResp.messages;
                         userRegistrationResp.version = "";
                     }
                 }
