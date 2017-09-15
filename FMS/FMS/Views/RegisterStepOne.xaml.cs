@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text.RegularExpressions;
 using Xamarin.Forms;
+using System.Threading.Tasks;
 
 namespace FMS
 {
@@ -51,6 +52,28 @@ namespace FMS
                 }
             };
             Resources.Add("styleEntryInput", styleEntryInput);
+            var styleLabelMsg = new Style(typeof(Label))
+            {
+                Setters = {
+                    new Setter { Property = Label.TextColorProperty, Value = AppGlobalVariables.red },
+                    new Setter { Property = Label.BackgroundColorProperty, Value = Color.White  },
+                    new Setter { Property = Label.IsVisibleProperty, Value = false  },
+                    new Setter { Property = Label.HorizontalTextAlignmentProperty, Value = LayoutOptions.Start  },
+                    new Setter { Property = Label.VerticalTextAlignmentProperty, Value = LayoutOptions.Start  },
+                    new Setter { Property = Label.HorizontalOptionsProperty, Value = LayoutOptions.StartAndExpand  },
+                    new Setter { Property = Label.VerticalOptionsProperty, Value = LayoutOptions.Start  }
+                }
+            };
+            Resources.Add("styleLabelMsg", styleLabelMsg);
+            var styleStackInputsHolder = new Style(typeof(StackLayout))
+            {
+                Setters = {
+                    new Setter { Property = StackLayout.BackgroundColorProperty, Value = AppGlobalVariables.transparent  },
+                    new Setter { Property = StackLayout.HorizontalOptionsProperty, Value = LayoutOptions.FillAndExpand  },
+                    new Setter { Property = StackLayout.VerticalOptionsProperty, Value = LayoutOptions.Center  }
+                }
+            };
+            Resources.Add("styleStackInputsHolder", styleStackInputsHolder);
             #endregion
 
             #endregion
@@ -141,12 +164,6 @@ namespace FMS
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
-            //BoxView boxNote = new BoxView()
-            //{
-            //  Color = AppGlobalVariables.gray,
-            //  HorizontalOptions = LayoutOptions.FillAndExpand,
-            //  VerticalOptions = LayoutOptions.FillAndExpand
-            //};
 
             Grid gridHeader = new Grid()
             {
@@ -256,12 +273,32 @@ namespace FMS
                 BorderColors = AppGlobalVariables.entryBorderColor,
                 Style = (Style)Resources["styleEntryInput"]
             };
+            Label lblUFirstName = new Label()
+            {
+                Text = "this is invald",
+                Style = (Style)Resources["styleLabelMsg"]
+            };
+            StackLayout stackUFirstName = new StackLayout()
+            {
+                Children = { entryUFirstName, lblUFirstName },
+                Style = (Style)Resources["styleStackInputsHolder"]
+            };
             CustomEntry entryULastName = new CustomEntry()
             {
                 Placeholder = "[LAST NAME]*",
                 PlaceholderColor = AppGlobalVariables.gray,
                 BorderColors = AppGlobalVariables.entryBorderColor,
                 Style = (Style)Resources["styleEntryInput"]
+            };
+            Label lblULastName = new Label()
+            {
+                Text = "this is invald",
+                Style = (Style)Resources["styleLabelMsg"]
+            };
+            StackLayout stackULastName = new StackLayout()
+            {
+                Children = { entryULastName, lblULastName },
+                Style = (Style)Resources["styleStackInputsHolder"]
             };
             CustomEntry entryUEmail = new CustomEntry()
             {
@@ -272,6 +309,16 @@ namespace FMS
                 IsEmail = true,
                 Style = (Style)Resources["styleEntryInput"]
             };
+            Label lblUEmail = new Label()
+            {
+                Text = "this is invald",
+                Style = (Style)Resources["styleLabelMsg"]
+            };
+            StackLayout stackUEmail = new StackLayout()
+            {
+                Children = { entryUEmail, lblUEmail },
+                Style = (Style)Resources["styleStackInputsHolder"]
+            };
             CustomEntry entryUPhone = new CustomEntry()
             {
                 Placeholder = "[PHONE NUMBER]*",
@@ -280,6 +327,16 @@ namespace FMS
                 Keyboard = Keyboard.Numeric,
                 IsPhoneNumber = true,
                 Style = (Style)Resources["styleEntryInput"]
+            };
+            Label lblUPhone = new Label()
+            {
+                Text = "this is invald",
+                Style = (Style)Resources["styleLabelMsg"]
+            };
+            StackLayout stackUPhone = new StackLayout()
+            {
+                Children = { entryUPhone, lblUPhone },
+                Style = (Style)Resources["styleStackInputsHolder"]
             };
             Image imgDropDown = new Image()
             {
@@ -292,7 +349,6 @@ namespace FMS
             };
             CustomPicker PickerUMobile = new CustomPicker()
             {
-                //Title = "",
                 ItemsSource = listMobileType,
                 TextColor = AppGlobalVariables.black,
                 BackgroundColor = AppGlobalVariables.lightGray,
@@ -301,13 +357,17 @@ namespace FMS
                 VerticalOptions = LayoutOptions.Start
             };
             PickerUMobile.SelectedItem = listMobileType[0];
-            //PickerUMobile.SelectedIndex = 1;
             CustomEntry entryUBusiness = new CustomEntry()
             {
                 Placeholder = "[BUSINESS NAME]",
                 PlaceholderColor = AppGlobalVariables.gray,
                 BorderColors = AppGlobalVariables.entryBorderColor,
                 Style = (Style)Resources["styleEntryInput"]
+            };
+            StackLayout stackUBusiness = new StackLayout()
+            {
+                Children = { entryUBusiness },
+                Style = (Style)Resources["styleStackInputsHolder"]
             };
             CustomEntry entryUZIP = new CustomEntry()
             {
@@ -317,6 +377,16 @@ namespace FMS
                 Keyboard = Keyboard.Numeric,
                 IsNumeric = true,
                 Style = (Style)Resources["styleEntryInput"]
+            };
+            Label lblUZIP = new Label()
+            {
+                Text = "this is invald",
+                Style = (Style)Resources["styleLabelMsg"]
+            };
+            StackLayout stackUZIP = new StackLayout()
+            {
+                Children = { entryUZIP, lblUZIP },
+                Style = (Style)Resources["styleStackInputsHolder"]
             };
 
             #endregion
@@ -578,15 +648,24 @@ namespace FMS
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.Start
             };
-            gridProfileInfo.Children.Add(entryUFirstName, 0, 3, 0, 1);
-            gridProfileInfo.Children.Add(entryULastName, 0, 3, 1, 2);
-            gridProfileInfo.Children.Add(entryUEmail, 0, 3, 2, 3);
-            gridProfileInfo.Children.Add(entryUPhone, 0, 3, 3, 4);
+            gridProfileInfo.Children.Add(stackUFirstName, 0, 3, 0, 1);
+            gridProfileInfo.Children.Add(stackULastName, 0, 3, 1, 2);
+            gridProfileInfo.Children.Add(stackUEmail, 0, 3, 2, 3);
+            gridProfileInfo.Children.Add(stackUPhone, 0, 3, 3, 4);
             gridProfileInfo.Children.Add(PickerUMobile, 0, 3, 4, 5);
             gridProfileInfo.Children.Add(imgDropDown, 1, 2, 4, 5);
-            gridProfileInfo.Children.Add(entryUBusiness, 0, 3, 5, 6);
-            gridProfileInfo.Children.Add(entryUZIP, 0, 3, 6, 7);
+            gridProfileInfo.Children.Add(stackUBusiness, 0, 3, 5, 6);
+            gridProfileInfo.Children.Add(stackUZIP, 0, 3, 6, 7);
             gridProfileInfo.Children.Add(gridFuelPreference, 0, 3, 7, 8);
+            //gridProfileInfo.Children.Add(stackUFirstName, 0, 3, 0, 1);
+            //gridProfileInfo.Children.Add(entryULastName, 0, 3, 1, 2);
+            //gridProfileInfo.Children.Add(entryUEmail, 0, 3, 2, 3);
+            //gridProfileInfo.Children.Add(entryUPhone, 0, 3, 3, 4);
+            //gridProfileInfo.Children.Add(PickerUMobile, 0, 3, 4, 5);
+            //gridProfileInfo.Children.Add(imgDropDown, 1, 2, 4, 5);
+            //gridProfileInfo.Children.Add(entryUBusiness, 0, 3, 5, 6);
+            //gridProfileInfo.Children.Add(entryUZIP, 0, 3, 6, 7);
+            //gridProfileInfo.Children.Add(gridFuelPreference, 0, 3, 7, 8);
 
             #endregion
 
@@ -640,34 +719,16 @@ namespace FMS
                     {
                         entryUPhone.Text = "+1 ";
                     }
-
+                    if (lblUPhone.IsVisible == true)
+                    {
+                        lblUPhone.IsVisible = false;
+                    }
                     if (entryUPhone.Text.Length > 15)
                     {
                         entryUPhone.Text = entryUPhone.Text.Remove(entryUPhone.Text.Length - 1);
                     }
                     else
                     {
-                /*
-                if (entryUPhone.Text.Length > 3)
-                {
-                    string splace = entryUPhone.Text.Substring(0, 3);
-                    if (entryUPhone.IsFocused == true && !(entryUPhone.Text.Substring(0, 3) == "+1 "))
-                    {
-                        if (!(entryUPhone.Text.Substring(0, 1) == "+"))
-                        {
-                            entryUPhone.Text = "+" + entryUPhone.Text;
-                        }
-                        if (!(entryUPhone.Text.Substring(1, 1) == "1"))
-                        {
-                            entryUPhone.Text = "1" + entryUPhone.Text;
-                        }
-                        if (!(entryUPhone.Text.Substring(2, 1) == " "))
-                        {
-                            entryUPhone.Text = " " + entryUPhone.Text;
-                        }
-                    }
-                }
-                */
                         if (strng < entryUPhone.Text.Length)
                         {
                             if (isRemoved == false)
@@ -703,38 +764,7 @@ namespace FMS
                                 }
                             }
                         }
-                /*
-                else if (strng > owner.Text.Length)
-                {
-                    if (entryUPhone.Text.Length == 7)
-                    {
-                        string splace = entryUPhone.Text.Substring(6, 1);
-                        if (!(splace == "-"))
-                        {
-                            string num = entryUPhone.Text.Remove(6, 1);
-                            entryUPhone.Text = num + "-" + splace;
-                        }
-                    }
-                    else if (entryUPhone.Text.Length == 11)
-                    {
-                        string splace = entryUPhone.Text.Substring(10, 1);
-                        if (!(splace == "-"))
-                        {
-                            string num = entryUPhone.Text.Remove(10, 1);
-                            entryUPhone.Text = num + "-" + splace;
-                        }
-                    }
-                    else
-                    {
-                    }
-
-                }
-                */
-                //if (!Regex.IsMatch(entryUPhone.Text, @"^((+|\d)+(\s|\x2D))?\d{3}-\d{3}-\d{4}$"))
-                //{
-                //  entryUPhone.Text = entryUPhone.Text.Remove(entryUPhone.Text.Length - 1);
-                //}
-                strng = entryUPhone.Text.Length;
+                        strng = entryUPhone.Text.Length;
                     }
                 }
                 catch (Exception ex)
@@ -761,10 +791,7 @@ namespace FMS
             {
                 try
                 {
-                    var owner = (CustomEntry)sender;
-
-            //owner.BorderColors = AppGlobalVariables.entryBorderColor;
-            if ((entryUPhone.Text == "+1 ") || (entryUPhone.Text == "+1"))
+                    if ((entryUPhone.Text == "+1 ") || (entryUPhone.Text == "+1"))
                     {
                         entryUPhone.Text = string.Empty;
                     }
@@ -794,6 +821,11 @@ namespace FMS
                     {
                         entryUFirstName.Text = entryUFirstName.Text.Remove(entryUFirstName.Text.Length - 1);
                     }
+                    if (lblUFirstName.IsVisible == true)
+                    {
+                        lblUFirstName.IsVisible = false;
+                    }
+
                 }
                 catch (Exception ex)
                 {
@@ -815,6 +847,10 @@ namespace FMS
                     {
                         entryULastName.Text = entryULastName.Text.Remove(entryULastName.Text.Length - 1);
                     }
+                    if (lblULastName.IsVisible == true)
+                    {
+                        lblULastName.IsVisible = false;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -832,11 +868,15 @@ namespace FMS
                     {
                         entryUEmail.Text = entryUEmail.Text.Remove(entryUEmail.Text.Length - 1);
                     }
-            //if (!Regex.IsMatch(entryUEmail.Text, @"^/W*$"))
-            //{
-            //  entryUEmail.Text = entryUEmail.Text.Remove(entryUEmail.Text.Length - 1);
-            //}
-        }
+                    if (lblUEmail.IsVisible == true)
+                    {
+                        lblUEmail.IsVisible = false;
+                    }
+                    //if (!Regex.IsMatch(entryUEmail.Text, @"^/W*$"))
+                    //{
+                    //  entryUEmail.Text = entryUEmail.Text.Remove(entryUEmail.Text.Length - 1);
+                    //}
+                }
                 catch (Exception ex)
                 {
                     var msg = ex.Message;
@@ -869,13 +909,17 @@ namespace FMS
             {
                 try
                 {
-            //if (entryUZIP.Text.Length > 5)
-            //{
-            //  entryUZIP.Text = entryUZIP.Text.Remove(entryUZIP.Text.Length - 1);
-            //}
-            if (!Regex.IsMatch(entryUZIP.Text, @"^\d{0,5}$"))
+                    //if (entryUZIP.Text.Length > 5)
+                    //{
+                    //  entryUZIP.Text = entryUZIP.Text.Remove(entryUZIP.Text.Length - 1);
+                    //}
+                    if (!Regex.IsMatch(entryUZIP.Text, @"^\d{0,5}$"))
                     {
                         entryUZIP.Text = entryUZIP.Text.Remove(entryUZIP.Text.Length - 1);
+                    }
+                    if (lblUZIP.IsVisible == true)
+                    {
+                        lblUZIP.IsVisible = false;
                     }
                 }
                 catch (Exception ex)
@@ -948,201 +992,216 @@ namespace FMS
             TapGestureRecognizer nextBtnTapped = new TapGestureRecognizer();
             nextBtnTapped.NumberOfTapsRequired = 1;
             nextBtnTapped.Tapped += (object sender, EventArgs e) =>
-            {
-                try
-                {
-                    if (string.IsNullOrEmpty(entryUFirstName.Text))
-                    {
-                        entryUFirstName.BorderColors = AppGlobalVariables.entryBorderErrorColor;
-                        scrollHolder.ScrollToAsync(entryUFirstName, ScrollToPosition.Center, true);
-                        DisplayThisAlert("First name cannot be empty.");
-                        entryUFirstName.Text = entryUFirstName.Text + " ";
-                //entryUFirstName.Text = entryUFirstName.Text.Remove(entryUFirstName.Text.Length - 1);
-            }
-                    else if (entryUFirstName.Text.Length > 30)
-                    {
-                        entryUFirstName.BorderColors = AppGlobalVariables.entryBorderErrorColor;
+           {
+               try
+               {
+                   if (string.IsNullOrEmpty(entryUFirstName.Text))
+                   {
+                       entryUFirstName.BorderColors = AppGlobalVariables.entryBorderErrorColor;
+                       scrollHolder.ScrollToAsync(entryUFirstName, ScrollToPosition.Center, true);
+                       //DisplayThisAlert("First name cannot be empty.");
+                       entryUFirstName.Text = entryUFirstName.Text + " ";
+                       lblUFirstName.Text = "First name cannot be empty.";
+                       lblUFirstName.IsVisible = true;
+                   }
+                   else if (entryUFirstName.Text.Length > 30)
+                   {
+                       entryUFirstName.BorderColors = AppGlobalVariables.entryBorderErrorColor;
+                       scrollHolder.ScrollToAsync(entryUFirstName, ScrollToPosition.Center, true);
+                       //DisplayThisAlert("First name should be all alphabets. No special characters (except space) or numbers, Max characters are 30.");
+                       entryUFirstName.Text = entryUFirstName.Text + " ";
+                       lblUFirstName.Text = "First name should be all alphabets. No special characters (except space) or numbers, Max characters are 30.";
+                       lblUFirstName.IsVisible = true;
+                   }
+                   else if (!Regex.IsMatch(entryUFirstName.Text, @"^[a-zA-Z\s]{1,}$"))
+                   {
+                       entryUFirstName.BorderColors = AppGlobalVariables.entryBorderErrorColor;
+                       scrollHolder.ScrollToAsync(entryUFirstName, ScrollToPosition.Center, true);
+                       //DisplayThisAlert("First name should be all alphabets. No special characters (except space) or numbers, Max characters are 30.");
+                       entryUFirstName.Text = entryUFirstName.Text + " ";
+                       lblUFirstName.Text = "First name cannot contain special characters. Please try again.";
+                       lblUFirstName.IsVisible = true;
+                   }
+                   else if (string.IsNullOrEmpty(entryULastName.Text))
+                   {
+                       entryULastName.BorderColors = AppGlobalVariables.entryBorderErrorColor;
+                       scrollHolder.ScrollToAsync(entryULastName, ScrollToPosition.Center, true);
+                       //DisplayThisAlert("Last name cannot be empty.");
+                       entryULastName.Text = entryULastName.Text + " ";
+                       lblULastName.Text = "Last name cannot be empty.";
+                       lblULastName.IsVisible = true;
+                   }
+                   else if (entryULastName.Text.Length > 30)
+                   {
+                       entryULastName.BorderColors = AppGlobalVariables.entryBorderErrorColor;
+                       scrollHolder.ScrollToAsync(entryULastName, ScrollToPosition.Center, true);
+                       //DisplayThisAlert("Last name should be all alphabets. No special characters (except space) or numbers, Max characters are 30.");
+                       entryULastName.Text = entryULastName.Text + " ";
+                       lblULastName.Text = "Last name should be all alphabets. No special characters (except space) or numbers, Max characters are 30.";
+                       lblULastName.IsVisible = true;
+                   }
+                   else if (!Regex.IsMatch(entryULastName.Text, @"^^[a-zA-Z\s]{1,}$"))
+                   {
+                       entryULastName.BorderColors = AppGlobalVariables.entryBorderErrorColor;
+                       scrollHolder.ScrollToAsync(entryULastName, ScrollToPosition.Center, true);
+                       //DisplayThisAlert("Last name should be all alphabets. No special characters (except space) or numbers, Max characters are 50.");
+                       entryULastName.Text = entryULastName.Text + " ";
+                       lblULastName.Text = "Last name cannot contain special characters. Please try again.";
+                       lblULastName.IsVisible = true;
+                   }
+                   else if (string.IsNullOrEmpty(entryUEmail.Text))
+                   {
+                       entryUEmail.BorderColors = AppGlobalVariables.entryBorderErrorColor;
+                       scrollHolder.ScrollToAsync(entryUEmail, ScrollToPosition.Center, true);
+                       //DisplayThisAlert("Email address cannot be empty.");
+                       entryUEmail.Text = entryUEmail.Text + " ";
+                       entryUEmail.Text = entryUEmail.Text.Remove(entryUEmail.Text.Length - 1);
+                       lblUEmail.Text = "Email address cannot be empty.";
+                       lblUEmail.IsVisible = true;
+                   }
+                   else if (entryUEmail.Text.Length > 50)
+                   {
+                       entryUEmail.BorderColors = AppGlobalVariables.entryBorderErrorColor;
+                       scrollHolder.ScrollToAsync(entryUEmail, ScrollToPosition.Center, true);
+                       //DisplayThisAlert("Email address text length should not be more than 50 characters.");
+                       entryUEmail.Text = entryUEmail.Text + " ";
+                       entryUEmail.Text = entryUEmail.Text.Remove(entryUEmail.Text.Length - 1);
+                       lblUEmail.Text = "Email address text length should not be more than 50 characters.";
+                       lblUEmail.IsVisible = true;
+                   }
+                   else if (!Regex.IsMatch(entryUEmail.Text.Trim(), @"^([a-zA-Z_])([a-zA-Z0-9_\-\.]*)@(\[((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}|((([a-zA-Z0-9\-]+)\.)+))([a-zA-Z]{2,}|(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\])$"))
+                   {
+                       entryUEmail.BorderColors = AppGlobalVariables.entryBorderErrorColor;
+                       scrollHolder.ScrollToAsync(entryUEmail, ScrollToPosition.Center, true);
+                       //DisplayThisAlert("Enter a valid email address.");
+                       entryUEmail.Text = entryUEmail.Text + " ";
+                       entryUEmail.Text = entryUEmail.Text.Remove(entryUEmail.Text.Length - 1);
+                       lblUEmail.Text = "The email you entered appears to be incorrect.  Please try again. ";
+                       lblUEmail.IsVisible = true;
+                   }
+                   else if (string.IsNullOrEmpty(entryUPhone.Text))
+                   {
+                       entryUPhone.BorderColors = AppGlobalVariables.entryBorderErrorColor;
+                       entryUPhone.Text = entryUPhone.Text + " ";
+                       //DisplayThisAlert("Phone number cannot be empty.");
+                       if (entryUPhone.Text.Length < 15)
+                       {
+                           entryUPhone.Text = entryUPhone.Text.Remove(entryUPhone.Text.Length - 1);
+                       }
+                       else if (entryUPhone.Text.Substring(14, 1) == " ")
+                       {
+                           entryUPhone.Text = entryUPhone.Text.Remove(entryUPhone.Text.Length - 1);
+                       }
+                       scrollHolder.ScrollToAsync(entryUPhone, ScrollToPosition.Center, true);
+                       lblUPhone.Text = "Phone number cannot be empty. ";
+                       lblUPhone.IsVisible = true;
+                   }
+                   //else if (!Regex.IsMatch(entryUPhone.Text, @"^((+|\d)+(\s|\x2D))?\d{3}-\d{3}-\d{4}$"))
+                   else if (!Regex.IsMatch(entryUPhone.Text, @"^\+(1)(\s)(\d{3})-(\d{3})-(\d{4})$"))
+                   {
+                       entryUPhone.BorderColors = AppGlobalVariables.entryBorderErrorColor;
+                       entryUPhone.Text = entryUPhone.Text + " ";
+                       //DisplayThisAlert("Mobile number format: +1 XXX-XXX-XXXX.");
+                       if (entryUPhone.Text.Length < 15)
+                       {
+                           entryUPhone.Text = entryUPhone.Text.Remove(entryUPhone.Text.Length - 1);
+                       }
+                       else if (entryUPhone.Text.Substring(14, 1) == " ")
+                       {
+                           entryUPhone.Text = entryUPhone.Text.Remove(entryUPhone.Text.Length - 1);
+                       }
+                       scrollHolder.ScrollToAsync(entryUPhone, ScrollToPosition.Center, true);
+                       switch (mobileType)
+                       {
+                           case "Mobile":
+                               lblUPhone.Text = "Please enter a valid cell phone number.";
+                               break;
+                           case "Home":
+                               lblUPhone.Text = "Please enter a valid home phone number.";
+                               break;
+                           case "Work":
+                               lblUPhone.Text = "Please enter a valid business phone number.";
+                               break;
+                           default:
+                               lblUPhone.Text = "Please enter a valid cell phone number.";
+                               break;
+                       }
+                       lblUPhone.IsVisible = true;
+                   }
+                   else if ((!string.IsNullOrEmpty(entryUZIP.Text)) && (entryUZIP.Text.Length != 5))
+                   {
+                       entryUZIP.BorderColors = AppGlobalVariables.entryBorderErrorColor;
+                       entryUZIP.Text = entryUZIP.Text + " ";
+                       scrollHolder.ScrollToAsync(entryUZIP, ScrollToPosition.Center, true);
+                       lblUZIP.Text = "Enter a valid ZIP code.";
+                       lblUZIP.IsVisible = true;
 
-                        scrollHolder.ScrollToAsync(entryUFirstName, ScrollToPosition.Center, true);
-                        DisplayThisAlert("First name should be all alphabets. No special characters (except space) or numbers, Max characters are 30.");
-                        entryUFirstName.Text = entryUFirstName.Text + " ";
-                //entryUFirstName.Text = entryUFirstName.Text.Remove(entryUFirstName.Text.Length - 1);
-            }
-                    else if (!Regex.IsMatch(entryUFirstName.Text, @"^[a-zA-Z\s]{1,}$"))
-                    {
-                        entryUFirstName.BorderColors = AppGlobalVariables.entryBorderErrorColor;
-                        scrollHolder.ScrollToAsync(entryUFirstName, ScrollToPosition.Center, true);
-                        DisplayThisAlert("First name should be all alphabets. No special characters (except space) or numbers, Max characters are 30.");
-                        entryUFirstName.Text = entryUFirstName.Text + " ";
-                        entryUFirstName.Text = entryUFirstName.Text.Remove(entryUFirstName.Text.Length - 1);
-                    }
-                    else if (string.IsNullOrEmpty(entryULastName.Text))
-                    {
-                        entryULastName.BorderColors = AppGlobalVariables.entryBorderErrorColor;
-                        scrollHolder.ScrollToAsync(entryULastName, ScrollToPosition.Center, true);
-                        DisplayThisAlert("Last name cannot be empty.");
-                        entryULastName.Text = entryULastName.Text + " ";
-                //entryULastName.Text = entryULastName.Text.Remove(entryULastName.Text.Length - 1);
-            }
-                    else if (entryULastName.Text.Length > 30)
-                    {
-                        entryULastName.BorderColors = AppGlobalVariables.entryBorderErrorColor;
+                   }
+                   else if ((!string.IsNullOrEmpty(entryUZIP.Text)) && (!Regex.IsMatch(entryUZIP.Text, @"^([1-9])([0-9]*)$")))
+                   {
+                       entryUZIP.BorderColors = AppGlobalVariables.entryBorderErrorColor;
+                       entryUZIP.Text = entryUZIP.Text + " ";
+                       //DisplayThisAlert("Enter a valid ZIP code.");
+                       scrollHolder.ScrollToAsync(entryUZIP, ScrollToPosition.Center, true);
+                       lblUZIP.Text = "ZIP Code cannot contain special characters or alphabets";
+                       lblUZIP.IsVisible = true;
 
-                        scrollHolder.ScrollToAsync(entryULastName, ScrollToPosition.Center, true);
-                        DisplayThisAlert("Last name should be all alphabets. No special characters (except space) or numbers, Max characters are 30.");
-                        entryULastName.Text = entryULastName.Text + " ";
-                //entryULastName.Text = entryULastName.Text.Remove(entryULastName.Text.Length - 1);
-            }
-                    else if (!Regex.IsMatch(entryULastName.Text, @"^^[a-zA-Z\s]{1,}$"))
-                    {
-                        entryULastName.BorderColors = AppGlobalVariables.entryBorderErrorColor;
-                        scrollHolder.ScrollToAsync(entryULastName, ScrollToPosition.Center, true);
-                        DisplayThisAlert("Last name should be all alphabets. No special characters (except space) or numbers, Max characters are 50.");
-                        entryULastName.Text = entryULastName.Text + " ";
-                //entryULastName.Text = entryULastName.Text.Remove(entryULastName.Text.Length - 1);
-            }
-                    else if (string.IsNullOrEmpty(entryUEmail.Text))
-                    {
-                        entryUEmail.BorderColors = AppGlobalVariables.entryBorderErrorColor;
-                        scrollHolder.ScrollToAsync(entryUEmail, ScrollToPosition.Center, true);
-                        DisplayThisAlert("Email address cannot be empty.");
-                        entryUEmail.Text = entryUEmail.Text + " ";
-                //entryUEmail.Text = entryUEmail.Text.Remove(entryUEmail.Text.Length - 1);
-            }
-                    else if (entryUEmail.Text.Length > 50)
-                    {
-                        entryUEmail.BorderColors = AppGlobalVariables.entryBorderErrorColor;
-                        scrollHolder.ScrollToAsync(entryUEmail, ScrollToPosition.Center, true);
-                        DisplayThisAlert("Email address text length should not be more than 50 characters.");
-                        entryUEmail.Text = entryUEmail.Text + " ";
-                        entryUEmail.Text = entryUEmail.Text.Remove(entryUEmail.Text.Length - 1);
-                    }
-                    else if (!Regex.IsMatch(entryUEmail.Text.Trim(), @"^([a-zA-Z_])([a-zA-Z0-9_\-\.]*)@(\[((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}|((([a-zA-Z0-9\-]+)\.)+))([a-zA-Z]{2,}|(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\])$"))
-                    {
+                   }
+                   else if (boolTandC == false)
+                   {
+                       DisplayThisAlert("You must accept the terms and conditions.");
+                   }
+                   else
+                   {
+                       Constants.apiurlExtendedUserId = WebUtility.UrlEncode(entryUEmail.Text);
 
-                        entryUEmail.BorderColors = AppGlobalVariables.entryBorderErrorColor;
-                        scrollHolder.ScrollToAsync(entryUEmail, ScrollToPosition.Center, true);
-                        DisplayThisAlert("Enter a valid email address.");
-                        entryUEmail.Text = entryUEmail.Text + " ";
-                        entryUEmail.Text = entryUEmail.Text.Remove(entryUEmail.Text.Length - 1);
-                    }
-                    else if (string.IsNullOrEmpty(entryUPhone.Text))
-                    {
-                        entryUPhone.BorderColors = AppGlobalVariables.entryBorderErrorColor;
-                        entryUPhone.Text = entryUPhone.Text + " ";
-                        DisplayThisAlert("Phone number cannot be empty.");
-                        if (entryUPhone.Text.Length < 15)
-                        {
-                            entryUPhone.Text = entryUPhone.Text.Remove(entryUPhone.Text.Length - 1);
-                        }
-                        else if (entryUPhone.Text.Substring(14, 1) == " ")
-                        {
-                            entryUPhone.Text = entryUPhone.Text.Remove(entryUPhone.Text.Length - 1);
-                        }
-                        scrollHolder.ScrollToAsync(entryUPhone, ScrollToPosition.Center, true);
-                    }
-            //else if (!Regex.IsMatch(entryUPhone.Text, @"^((+|\d)+(\s|\x2D))?\d{3}-\d{3}-\d{4}$"))
-            //{
-            //    entryUPhone.BorderColors = AppGlobalVariables.entryBorderErrorColor;
-            //    entryUPhone.Text = entryUPhone.Text + " ";
-            //    DisplayThisAlert("Mobile number format: +1 XXX-XXX-XXXX.");
-            //    if (entryUPhone.Text.Length < 15)
-            //    {
-            //        entryUPhone.Text = entryUPhone.Text.Remove(entryUPhone.Text.Length - 1);
-            //    }
-            //    else if (entryUPhone.Text.Substring(14, 1) == " ")
-            //    {
-            //        entryUPhone.Text = entryUPhone.Text.Remove(entryUPhone.Text.Length - 1);
-            //    }
-            //    scrollHolder.ScrollToAsync(entryUPhone, ScrollToPosition.Center, true);
-            //}
-            else if ((!string.IsNullOrEmpty(entryUZIP.Text)) && (entryUZIP.Text.Length != 5))
-                    {
-                        entryUZIP.BorderColors = AppGlobalVariables.entryBorderErrorColor;
-                        entryUZIP.Text = entryUZIP.Text + " ";
-                        DisplayThisAlert("Enter a valid ZIP code.");
-                        if (entryUZIP.Text.Length < 5)
-                        {
-                            entryUZIP.Text = entryUZIP.Text.Remove(entryUZIP.Text.Length - 1);
-                        }
-                        else if (entryUZIP.Text.Substring(4, 1) == " ")
-                        {
-                            entryUZIP.Text = entryUZIP.Text.Remove(entryUZIP.Text.Length - 1);
-                        }
-                        scrollHolder.ScrollToAsync(entryUZIP, ScrollToPosition.Center, true);
+                       userP.application = "mobFleetApp";
+                       userP.givenName = entryUFirstName.Text;
+                       userP.sn = entryULastName.Text;
+                       userP.mail = entryUEmail.Text;
+                       switch (mobileType)
+                       {
+                           case "Mobile":
+                               userP.mobile = entryUPhone.Text;
+                               userP.homePhoneNumber = "";
+                               userP.telephoneNumber = "";
+                               break;
+                           case "Home":
+                               userP.mobile = "";
+                               userP.homePhoneNumber = entryUPhone.Text;
+                               userP.telephoneNumber = "";
+                               break;
+                           case "Work":
+                               userP.mobile = "";
+                               userP.homePhoneNumber = "";
+                               userP.telephoneNumber = entryUPhone.Text;
+                               break;
+                           default:
+                               userP.mobile = entryUPhone.Text;
+                               userP.homePhoneNumber = "";
+                               userP.telephoneNumber = "";
+                               break;
+                       }
+                       userP.Company_entered_byUser = entryUBusiness.Text ?? "";
+                       userP.Company_Zip = entryUZIP.Text ?? "";
+                       userP.Fuel_Preference = fuelPref;
+                       userP.Receive_Ryder_Communication = (switchCommunications.IsToggled) ? "1" : "0";
 
-                    }
-                    else if ((!string.IsNullOrEmpty(entryUZIP.Text)) && (!Regex.IsMatch(entryUZIP.Text, @"^([1-9])([0-9]*)$")))
-                    {
-                        entryUZIP.BorderColors = AppGlobalVariables.entryBorderErrorColor;
-                        entryUZIP.Text = entryUZIP.Text + " ";
-                        DisplayThisAlert("Enter a valid ZIP code.");
-                        if (entryUZIP.Text.Length < 5)
-                        {
-                            entryUZIP.Text = entryUZIP.Text.Remove(entryUZIP.Text.Length - 1);
-                        }
-                        else if (entryUZIP.Text.Substring(4, 1) == " ")
-                        {
-                            entryUZIP.Text = entryUZIP.Text.Remove(entryUZIP.Text.Length - 1);
-                        }
-                        scrollHolder.ScrollToAsync(entryUZIP, ScrollToPosition.Center, true);
+                       userE.MobFleetApp = "1";
+                       userE.FIS_Rental = truckData;
+                       userE.lessee = fleetData;
 
-                    }
-                    else if (boolTandC == false)
-                    {
-                        DisplayThisAlert("You must accept the terms and conditions.");
-                    }
-                    else
-                    {
-                        Constants.apiurlExtendedUserId = WebUtility.UrlEncode(entryUEmail.Text);
-
-                        userP.application = "mobFleetApp";
-                        userP.givenName = entryUFirstName.Text;
-                        userP.sn = entryULastName.Text;
-                        userP.mail = entryUEmail.Text;
-                        switch (mobileType)
-                        {
-                            case "Mobile":
-                                userP.mobile = entryUPhone.Text;
-                                userP.homePhoneNumber = "";
-                                userP.telephoneNumber = "";
-                                break;
-                            case "Home":
-                                userP.mobile = "";
-                                userP.homePhoneNumber = entryUPhone.Text;
-                                userP.telephoneNumber = "";
-                                break;
-                            case "Work":
-                                userP.mobile = "";
-                                userP.homePhoneNumber = "";
-                                userP.telephoneNumber = entryUPhone.Text;
-                                break;
-                            default:
-                                userP.mobile = entryUPhone.Text;
-                                userP.homePhoneNumber = "";
-                                userP.telephoneNumber = "";
-                                break;
-                        }
-                        userP.Company_entered_byUser = entryUBusiness.Text ?? "";
-                        userP.Company_Zip = entryUZIP.Text ?? "";
-                        userP.Fuel_Preference = fuelPref;
-                        userP.Receive_Ryder_Communication = (switchCommunications.IsToggled) ? "1" : "0";
-
-                        userE.MobFleetApp = "1";
-                        userE.FIS_Rental = truckData;
-                        userE.lessee = fleetData;
-
-                        userRR.UserProfile = userP;
-                        userRR.Entitlements = userE;
-                        Navigation.PushModalAsync(new RegisterStepTwo());
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    var msg = ex.Message;
-                }
-            };
+                       userRR.UserProfile = userP;
+                       userRR.Entitlements = userE;
+                       Navigation.PushModalAsync(new RegisterStepTwo());
+                   }
+               }
+               catch (Exception ex)
+               {
+                   var msg = ex.Message;
+                   DisplayThisAlert(msg);
+               }
+           };
             boxNext.GestureRecognizers.Add(nextBtnTapped);
             #endregion
 

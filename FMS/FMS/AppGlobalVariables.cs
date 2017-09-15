@@ -10,6 +10,7 @@ namespace FMS
         public static string fontFamilyReg = "";
 
         public static Color orange = Color.FromHex("#F78F1E");
+        public static Color red = Color.FromHex("#FF0000");
         public static Color black = Color.FromHex("#000000");
         public static Color white = Color.FromHex("#FFFFFF");
         public static Color gray = Color.FromHex("#6C6C6C");

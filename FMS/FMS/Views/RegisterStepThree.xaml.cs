@@ -9,11 +9,20 @@ namespace FMS
 {
     public partial class RegisterStepThree : BaseContentPage
     {
+        int intPassMinLength = 6;
         public RegisterStepThree()
         {
             #region for local variables
             int height = (screenHeight * 1) / 100;
             int width = (screenWidth * 1) / 100;
+            if (!string.IsNullOrEmpty(RegisterStepOne.rso.userP.employeeNumber) || RegisterStepOne.rso.userE.FIS_Rental.Count > 0 || RegisterStepOne.rso.userE.lessee.Count > 0)
+            {
+                intPassMinLength = 8;
+            }
+            else
+            {
+                intPassMinLength = 6;
+            }
             #endregion
             InitializeComponent();
 
@@ -65,9 +74,7 @@ namespace FMS
             {
                 Text = "STEP 3:",
                 HeightRequest = height * 8,
-                //BackgroundColor = Color.Green,
                 FontAttributes = FontAttributes.Bold,
-                //BackgroundColor = Color.Green,
                 FontSize = Device.OnPlatform(height * 3, height * 3, height * 3),
                 TextColor = AppGlobalVariables.black,
                 HorizontalTextAlignment = TextAlignment.Center,
@@ -80,7 +87,6 @@ namespace FMS
             {
                 Text = "Create a password",
                 TextColor = AppGlobalVariables.black,
-                //BackgroundColor = Color.Maroon,
                 FontAttributes = FontAttributes.Bold,
                 VerticalTextAlignment = TextAlignment.Start,
                 HorizontalOptions = LayoutOptions.Center,
@@ -224,7 +230,7 @@ namespace FMS
             #endregion
 
             #region for data filling
-            /*
+
             if (!string.IsNullOrEmpty(RegisterStepOne.rso.userP.password))
             {
                 entryUPassword.Text = RegisterStepOne.rso.userP.password;
@@ -233,20 +239,19 @@ namespace FMS
             {
                 entryUConfirlPassword.Text = RegisterStepOne.rso.userP.confirmPassword;
             }
-            */
+
             #endregion
 
             #region for validations and events
 
-
             #region for text changes in entries
             entryUPassword.TextChanged += (object sender, TextChangedEventArgs e) =>
             {
-                //RegisterStepOne.rso.userP.password = entryUPassword.Text;
+                RegisterStepOne.rso.userP.password = entryUPassword.Text;
             };
             entryUConfirlPassword.TextChanged += (object sender, TextChangedEventArgs e) =>
             {
-                //RegisterStepOne.rso.userP.confirmPassword = entryUConfirlPassword.Text;
+                RegisterStepOne.rso.userP.confirmPassword = entryUConfirlPassword.Text;
             };
             #endregion
 
@@ -409,7 +414,7 @@ namespace FMS
                 string strPassStrength = "";
                 bool hasCapiAlpha = false, hasSmallAlpha = false, hasNumeric = false, hasSpecialChar = false, hasEnoughLength = false, isrepitative = false;
                 var charArrPass = strPass.ToCharArray();
-                if (strPass.Length >= 6 && strPass.Length <= 15)
+                if (strPass.Length >= intPassMinLength && strPass.Length <= 15)
                 {
                     hasEnoughLength = true;
                     foreach (var str in charArrPass)
@@ -476,7 +481,7 @@ namespace FMS
                 {
                     isValid = false;
                     fsError.Spans.Add(new Span { Text = strPassStrength, ForegroundColor = Color.Black });
-                    fsError.Spans.Add(new Span { Text = "Text length should be from 6 - 15 characters", ForegroundColor = Color.Black });
+                    fsError.Spans.Add(new Span { Text = "Text length should be from " + intPassMinLength + " - 15 characters", ForegroundColor = Color.Black });
                     DisplayCustomAlert("Alert", fsError);
                 }
                 else if (hasSmallAlpha == false)
