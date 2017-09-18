@@ -11,10 +11,10 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Graphicss = Android.Graphics;
 
-[assembly: ExportRenderer(typeof(CustomEntry), typeof(MyEntryRenderer))]
+[assembly: ExportRenderer(typeof(CustomEntry), typeof(CustomEntryRender))]
 namespace FMS.Android
 {
-    public class MyEntryRenderer : EntryRenderer
+    public class CustomEntryRender : EntryRenderer
     {
         protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
         {

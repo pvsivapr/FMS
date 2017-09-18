@@ -7,18 +7,18 @@ using UIKit;
 using Foundation;
 using CoreText;
 
-[assembly: ExportRenderer(typeof(CustomULineLabelView), typeof(CustomULineLabelViewRender))]
+[assembly: ExportRenderer(typeof(CustomUnderLineLabelView), typeof(CustomUnderLineLabelViewRender))]
 namespace FMS.iOS
 {
-    public class CustomULineLabelViewRender : ViewRenderer<CustomULineLabelView, UIView>
+    public class CustomUnderLineLabelViewRender : ViewRenderer<CustomUnderLineLabelView, UIView>
     {
-        public CustomULineLabelViewRender() { }
+        public CustomUnderLineLabelViewRender() { }
         //this render is not working properly you have to check this onces
-        protected override void OnElementChanged(ElementChangedEventArgs<CustomULineLabelView> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<CustomUnderLineLabelView> e)
         {
             base.OnElementChanged(e);
 
-            CustomULineLabelView element = new CustomULineLabelView();
+            CustomUnderLineLabelView element = new CustomUnderLineLabelView();
             if (e.OldElement != null)
             {
                 element = e.OldElement;

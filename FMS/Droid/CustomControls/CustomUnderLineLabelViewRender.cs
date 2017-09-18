@@ -8,19 +8,19 @@ using FMS.Droid;
 using android = global::Android;
 using Android.Text;
 
-[assembly: ExportRenderer(typeof(CustomULineLabelView), typeof(CustomULineLabelViewRender))]
+[assembly: ExportRenderer(typeof(CustomUnderLineLabelView), typeof(CustomUnderLineLabelViewRender))]
 namespace FMS.Droid
 {
-    public class CustomULineLabelViewRender : ViewRenderer<CustomULineLabelView, LinearLayout>
+    public class CustomUnderLineLabelViewRender : ViewRenderer<CustomUnderLineLabelView, LinearLayout>
     {
-        public CustomULineLabelViewRender() { }
+        public CustomUnderLineLabelViewRender() { }
 
 
-        protected override void OnElementChanged(ElementChangedEventArgs<CustomULineLabelView> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<CustomUnderLineLabelView> e)
         {
             base.OnElementChanged(e);
 
-            CustomULineLabelView element = new CustomULineLabelView();
+            CustomUnderLineLabelView element = new CustomUnderLineLabelView();
             if (e.OldElement != null)
             {
                 element = e.OldElement;

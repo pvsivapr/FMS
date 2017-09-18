@@ -13,25 +13,25 @@ using android = global::Android;
 using Android.Text.Method;
 using Android.Views.Accessibility;
 
-[assembly: ExportRenderer(typeof(CustomUlineLabel), typeof(CustomUlineLabelRender))]
+[assembly: ExportRenderer(typeof(CustomUnderLineLabel), typeof(CustomUnderLineLabelRender))]
 namespace FMS.Droid
 {
-    public class CustomUlineLabelRender : LabelRenderer
+    public class CustomUnderLineLabelRender : LabelRenderer
     {
-        public CustomUlineLabelRender()
+        public CustomUnderLineLabelRender()
         { }
 
         protected override void OnElementChanged(ElementChangedEventArgs<Label> e)
         {
             base.OnElementChanged(e);
-            CustomUlineLabel element = Element as CustomUlineLabel;
+            CustomUnderLineLabel element = Element as CustomUnderLineLabel;
             if (e.NewElement != null)
             {
-                element = Element as CustomUlineLabel;
+                element = Element as CustomUnderLineLabel;
             }
             else
             {
-                element = e.OldElement as CustomUlineLabel;
+                element = e.OldElement as CustomUnderLineLabel;
             }
             if (Control != null)
             {

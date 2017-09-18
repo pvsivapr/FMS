@@ -5,10 +5,10 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(CustomEditor), typeof(CustomEditorRenderer))]
+[assembly: ExportRenderer(typeof(CustomEditor), typeof(CustomEditorRender))]
 namespace FMS.iOS
 {
-    public class CustomEditorRenderer : EditorRenderer
+    public class CustomEditorRender : EditorRenderer
     {
         private string Placeholder { get; set; }
         protected override void OnElementChanged(ElementChangedEventArgs<Editor> e)
