@@ -10,6 +10,8 @@ using Android.OS;
 using Android.Text;
 using Android.Text.Style;
 using android = global::Android;
+using Android.Text.Method;
+using Android.Views.Accessibility;
 
 [assembly: ExportRenderer(typeof(CustomUlineLabel), typeof(CustomUlineLabelRender))]
 namespace FMS.Droid
@@ -83,18 +85,25 @@ namespace FMS.Droid
                         var string3 = element.Text.Substring(element.StartIndex + charLength, (element.Text.Length - (element.StartIndex + charLength)));
 
                         //string finalText = "<p valign=\"center\">" + string1 + "<u>" + string2 + "</u>" + string3 + "</p>";
-                        string finalText = "<table><tr><td>" + string1 + "<u>" + string2 + "</u>" + string3 + "</td></tr></table>"; ;
+                        //string finalText = "<table><tr><td>" + string1 + "<u>" + string2 + "</u>" + string3 + "</td></tr></table>"; ;
+                        string finalText = "<table><tr><td>" + string1 + "<u>" + "<a href=\"https://www.google.co.in\">" + string2 + "</a>" + "</u>" + string3 + "</td></tr></table>";
+
 
                         label.TextFormatted = Html.FromHtml(finalText);
 
-                        label.LayoutParameters = new LayoutParams(LayoutParams.MatchParent, LayoutParams.MatchParent);
+                        label.MovementMethod = LinkMovementMethod.Instance;//etMovementMethod(LinkMovementMethod.Instance);
+                        label.SetLinkTextColor(android.Graphics.Color.Black);
+                        label.LayoutParameters = new LayoutParams(LayoutParams.WrapContent, LayoutParams.WrapContent);
                         //uLineTextView.LayoutParameters = new android.Views.LayoutParameters(LayoutParams.MatchParent, LayoutParams.MatchParent);
                         //uLineTextView.SetForegroundGravity(android.Views.GravityFlags.CenterVertical);
                         //label.SetBackgroundColor(android.Graphics.Color.Green);
-                        label.Gravity = android.Views.GravityFlags.Center;
+                        label.Gravity = android.Views.GravityFlags.Center | android.Views.GravityFlags.Left;
 
+                        //ClickableSpan cs = new ClickableSpan();
 
-
+                        //SpannableString mySpannableString = new SpannableString(element.Text);
+                        //mySpannableString.SetSpan(new ClickableSpan(), startind, (startind + (charLength)), SpanTypes.ExclusiveExclusive);
+                        //label.TextFormatted = mySpannableString;
 
                         /*
                         //SpannableString mySpannableString = new SpannableString(element.Text);
